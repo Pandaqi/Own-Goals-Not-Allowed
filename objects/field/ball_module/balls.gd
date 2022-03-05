@@ -37,10 +37,29 @@ func check_for_goals():
 		if not b.is_scoreable(): continue
 		
 		var local_position = b.global_transform.origin - global_position
-		if local_position.y > 0.5*size.y: scored_in_goal(field.bottom_team,b)
-		elif local_position.y < -0.5*size.y: scored_in_goal(field.top_team, b)
+		if local_position.y > 0.5*size.y: scored_in_goal(field.bottom_team, b, false)
+		elif local_position.y < -0.5*size.y: scored_in_goal(field.top_team, b, true)
 
-func scored_in_goal(team_num : int, ball):
+func is_own_goal(team_num, ball) -> bool:
+	return ball.get_last_touching_team_num() == team_num
+
+# TO DO: make this a signal instead that is connected with all those other parts?
+func scored_in_goal(team_num : int, ball, top_goal : bool):
+	var own_goal = is_own_goal(team_num, ball)
+	
+	field.goaleffects.execute(ball, own_goal)
 	field.score.scored_in_goal(team_num, ball)
+	field.edges.scored_in_goal(top_goal, ball)
 	ball.on_goal_scored()
 	ball.plan_teleport(global_position + Vector2.ZERO)
+
+func get_dist_to_closest(pos : Vector2) -> float:
+	var closest_dist : float = INF
+	
+	for b in balls:
+		var dist = (b.position - pos).length()
+		if dist >= closest_dist: continue
+		closest_dist = dist
+	
+	return closest_dist
+		

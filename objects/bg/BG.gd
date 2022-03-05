@@ -1,11 +1,10 @@
 extends CanvasLayer
 
+@onready var main_node = get_parent()
 @onready var color_rect = $ColorRect
 
 func activate():
-	get_viewport().size_changed.connect(on_resize)
-	on_resize()
+	main_node.on_resize.connect(on_resize)
 
-func on_resize():
-	var vp = get_viewport().size
+func on_resize(vp):
 	color_rect.material.set_shader_param("real_size", vp)

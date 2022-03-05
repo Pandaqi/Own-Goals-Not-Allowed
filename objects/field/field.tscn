@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d4la8xs0ylxci"]
+[gd_scene load_steps=14 format=3 uid="uid://d4la8xs0ylxci"]
 
 [ext_resource type="Script" path="res://objects/field/field.gd" id="1_ssool"]
 [ext_resource type="Shader" path="res://objects/field/bg/field.gdshader" id="2_7vcgt"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://objects/field/edges/edges.gd" id="3_nambx"]
 [ext_resource type="Script" path="res://objects/field/ball_module/balls.gd" id="4_grnwn"]
 [ext_resource type="Script" path="res://objects/field/players/players.gd" id="5_xtp7x"]
+[ext_resource type="Script" path="res://objects/field/goaleffects/goaleffects.gd" id="11_bvkdh"]
+[ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="11_c461m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a6lye"]
 shader = ExtResource( "2_7vcgt" )
@@ -43,3 +45,40 @@ script = ExtResource( "5_xtp7x" )
 
 [node name="Edges" type="Node2D" parent="."]
 script = ExtResource( "3_nambx" )
+
+[node name="GoalEffects" type="Node2D" parent="."]
+script = ExtResource( "11_bvkdh" )
+
+[node name="Goal" type="Node2D" parent="GoalEffects"]
+
+[node name="Goal" type="Label" parent="GoalEffects/Goal"]
+offset_left = -85.0
+offset_top = -66.0
+offset_right = 86.0
+offset_bottom = 68.0
+theme_override_colors/font_outline_color = Color(0.196078, 1, 0, 1)
+theme_override_colors/font_color = Color(0.00392157, 0.0745098, 0.00392157, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource( "11_c461m" )
+theme_override_font_sizes/font_size = 32
+text = "GOAL!"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="OwnGoal" type="Node2D" parent="GoalEffects"]
+
+[node name="OwnGoal" type="Label" parent="GoalEffects/OwnGoal"]
+offset_left = -85.0
+offset_top = -66.0
+offset_right = 86.0
+offset_bottom = 68.0
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0.682353, 0.682353, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource( "11_c461m" )
+theme_override_font_sizes/font_size = 32
+text = "OWN GOAL!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

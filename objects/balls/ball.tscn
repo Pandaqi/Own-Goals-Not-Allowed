@@ -16,6 +16,7 @@ continuous_cd = 2
 contacts_reported = 5
 contact_monitor = true
 can_sleep = false
+linear_damp = 0.5
 script = ExtResource( "1_a8hnv" )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

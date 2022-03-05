@@ -52,7 +52,7 @@ func update_shape():
 	update()
 
 func _draw():
-	color = GDict.cfg.colors.teams[body.team_num]
+	color = GDict.cfg.colors.teams[body.team_num].lightened(0.3)
 	
 	draw_polygon(points, [color])
 	

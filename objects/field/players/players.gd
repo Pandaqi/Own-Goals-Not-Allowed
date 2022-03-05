@@ -17,9 +17,9 @@ func create_initial_players():
 func add_player(p_num : int):
 	var p = player_scene.instantiate()
 	p.set_position(field.get_random_position_inside())
-	p.player_num = p_num
-	p.team_num = GDict.player_data[p_num].team
 	add_child(p)
+	
+	p.set_data(p_num, GDict.player_data[p_num].team)
 	
 	players.append(p)
 	players_by_num[str(p_num)].append(p)
@@ -74,3 +74,13 @@ func get_non_present_player_num_from_team(t_num : int) -> int:
 	
 	if all_players_in_team.size() <= 0: return -1
 	return all_players_in_team[randi() % all_players_in_team.size()]
+
+func get_dist_to_closest(pos : Vector2) -> float:
+	var closest_dist : float = INF
+	
+	for p in players:
+		var dist = (p.position - pos).length()
+		if dist >= closest_dist: continue
+		closest_dist = dist
+	
+	return closest_dist

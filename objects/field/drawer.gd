@@ -58,7 +58,7 @@ func _draw():
 	#
 	# keeper area
 	#
-	var goal_size = body.edges.GOAL_WIDTH
+	var goal_size = body.edges.goal_width
 	var keeper_margin = 50
 	var mid_top = Vector2(0, -0.5*size.y)
 	var area_size = Vector2(goal_size + keeper_margin, 0.5*goal_size)

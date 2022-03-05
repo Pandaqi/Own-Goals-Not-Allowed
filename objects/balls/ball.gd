@@ -24,19 +24,19 @@ func is_scoreable() -> bool:
 func _integrate_forces(state):
 	if is_teleporting():
 		state.transform.origin = teleport_pos
-		state.linear_velocity = Vector2.ZERO
-		state.angular_velocity = 0
+		state.linear_velocity *= -0.1
+		state.angular_velocity *= -0.1
 		teleport_pos = null
 		return
 	
-	cap_velocity()
+	cap_velocity(state)
 
-func cap_velocity():
-	var speed = get_linear_velocity().length()
-	var dir = get_linear_velocity().normalized()
+func cap_velocity(state):
+	var speed = state.linear_velocity.length()
+	var dir = state.linear_velocity.normalized()
 	var capped_speed = clamp(speed, VEL_BOUNDS.min, VEL_BOUNDS.max)
 	var new_speed = dir * capped_speed
-	set_linear_velocity(new_speed)
+	state.linear_velocity = new_speed
 
 func _on_ball_body_entered(body):
 	if not body.is_in_group("Players"): return

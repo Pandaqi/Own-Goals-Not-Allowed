@@ -109,7 +109,7 @@ func build_ui_input_map():
 	
 	# opening/closing the menu
 	ev = InputEventKey.new()
-	ev.keycode = KEY_ESCAPE
+	ev.keycode = KEY_P
 	build_input_action("toggle_pause_menu", ev)
 	
 	ev = InputEventJoypadButton.new()
@@ -124,13 +124,23 @@ func build_ui_input_map():
 	
 	# quitting out of this round
 	ev = InputEventKey.new()
-	ev.keycode = KEY_SPACE
+	ev.keycode = KEY_ESCAPE
 	build_input_action("pause_menu_exit", ev)
 	
 	ev = InputEventJoypadButton.new()
 	ev.device = 0
-	ev.button_index = 0
+	ev.button_index = 1
 	build_input_action("pause_menu_exit", ev)
+	
+	# restart this round
+	ev = InputEventKey.new()
+	ev.keycode = KEY_R
+	build_input_action("pause_menu_restart", ev)
+	
+	ev = InputEventJoypadButton.new()
+	ev.device = 0
+	ev.button_index = 0
+	build_input_action("pause_menu_restart", ev)
 	
 	#
 	# Game over
@@ -139,6 +149,10 @@ func build_ui_input_map():
 	# restart
 	ev = InputEventKey.new()
 	ev.keycode = KEY_SPACE
+	build_input_action("game_over_restart", ev)
+	
+	ev = InputEventKey.new()
+	ev.keycode = KEY_R
 	build_input_action("game_over_restart", ev)
 	
 	ev = InputEventJoypadButton.new()

@@ -11,9 +11,16 @@ var team_num : int = -1
 
 @onready var shaper = $Shaper
 @onready var drawer = $Drawer
+@onready var sprite = $Sprite2D
 
 func _ready():
 	shaper.activate()
+
+func set_data(p_num : int, t_num : int):
+	player_num = p_num
+	team_num = t_num
+	
+	sprite.set_frame(GDict.player_data[p_num].face)
 
 func handle_input(vec):
 	last_input = vec

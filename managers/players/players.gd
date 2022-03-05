@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var main_node = get_parent()
 
-const PREDEFINED_SHAPE_SCALE : float = 0.8
+const PREDEFINED_SHAPE_SCALE : float = 1.0
 var available_shapes : Array = []
 var predefined_shape_list = preload("res://objects/shapes/predefined_shape_list.tscn")
 

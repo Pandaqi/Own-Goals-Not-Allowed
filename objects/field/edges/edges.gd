@@ -1,9 +1,13 @@
 extends Node2D
 
 const THICKNESS : float = 20.0
-const GOAL_WIDTH : float = 100.0
+const GOAL_BOUNDS : Dictionary = { 'min': 150.0, 'max': 200.0 }
 
 @onready var field = get_parent()
+var goal_width : float
+
+var goal_line : PackedScene = preload("res://objects/field/goaleffects/goal_line.tscn")
+var lines = []
 
 var edge_scene : PackedScene = preload("res://objects/field/edges/single_edge.tscn")
 var edges = {
@@ -19,6 +23,9 @@ var edges = {
 }
 
 func activate():
+	# TO DO: why is this wrong?
+	# var true_max = min(GOAL_BOUNDS.max, field.get_width()-10)
+	goal_width = randf_range(GOAL_BOUNDS.min, GOAL_BOUNDS.max)
 	create_edges()
 
 func create_edges():
@@ -30,10 +37,17 @@ func create_edges():
 	# only react to players, nothing else
 	edges.player_block_bottom.make_player_blocking()
 	edges.player_block_top.make_player_blocking()
+	
+	var line_0 = goal_line.instantiate()
+	var line_1 = goal_line.instantiate()
+	
+	add_child(line_0)
+	add_child(line_1)
+	lines = [line_0, line_1]
 
 func update_from_field():
 	var size = field.get_size()
-	var horiz_size : float = 0.5 * (size.x - GOAL_WIDTH)
+	var horiz_size : float = 0.5 * (size.x - goal_width)
 	var vert_size : float = size.y + THICKNESS # for covering the corners
 	
 	# set everything to the right sizes (the easy part)
@@ -77,3 +91,20 @@ func update_from_field():
 	edges.bottom_left.set_team(field.bottom_team)
 	edges.bottom_right.set_team(field.bottom_team)
 	edges.player_block_bottom.set_team(field.bottom_team)
+	
+	# add goal decorations
+	var mid_top = 0.5 * (top_left + top_right)
+	var mid_bottom = 0.5 * (bottom_left + bottom_right)
+	
+	var start = mid_top - 0.5*goal_width*Vector2.RIGHT
+	var num_steps : int = 30
+	lines[0].create(start, num_steps, goal_width)
+	
+	start = mid_bottom - 0.5*goal_width*Vector2.RIGHT
+	lines[1].create(start, num_steps, goal_width)
+
+func scored_in_goal(in_top_goal : bool, ball):
+	var node = lines[1]
+	if in_top_goal: node = lines[0]
+	
+	node.apply_impulse_at_closest_point(ball.global_transform.origin, 10.0)

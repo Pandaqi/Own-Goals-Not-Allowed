@@ -49,12 +49,10 @@ func scored_in_goal(team_num : int, ball):
 		if field.main_node.players.count_instances_of(player_num) > 1 and field.players.count_instances_of_team(other_team) > 1:
 			field.players.remove_player(player_num)
 	
-	# RULE #2: The losing team gets an extra player here
-	# It's always a player we don't have yet
-	# But if that isn't possible
+	# RULE #2: The losing team gets an extra player here, if it's missing (at least) one
 	var new_player_num = field.players.get_non_present_player_num_from_team(team_num)
-	if new_player_num < 0 and not field.players.team_at_max_capacity(team_num):
-		new_player_num = field.main_node.players.get_random_player_num_in_team(team_num)
+#	if new_player_num < 0 and not field.players.team_at_max_capacity(team_num):
+#		new_player_num = field.main_node.players.get_random_player_num_in_team(team_num)
 	
 	if new_player_num >= 0: field.players.add_player(new_player_num)
 
