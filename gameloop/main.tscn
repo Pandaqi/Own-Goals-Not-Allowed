@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=3 uid="uid://5wkg5kv018aa"]
+
+[ext_resource type="Script" path="res://gameloop/main.gd" id="1_4ils3"]
+[ext_resource type="Script" path="res://managers/field_manager/field_manager.gd" id="1_oug1n"]
+[ext_resource type="Script" path="res://objects/bg/BG.gd" id="2_2nngi"]
+[ext_resource type="Shader" path="res://objects/bg/bg.gdshader" id="2_a13u6"]
+[ext_resource type="Texture2D" uid="uid://bsqd1mlrshb6h" path="res://objects/field/bg/BG.png" id="3_85k5m"]
+[ext_resource type="Script" path="res://managers/score/score.gd" id="3_pa3di"]
+[ext_resource type="PackedScene" uid="uid://irjchanwcytr" path="res://managers/score/score_label.tscn" id="4_13nv2"]
+[ext_resource type="Script" path="res://managers/players/players.gd" id="5_fxqbw"]
+[ext_resource type="Script" path="res://managers/gameover/gameover.gd" id="6_mu8e1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_njd4n"]
+shader = ExtResource( "2_a13u6" )
+shader_param/uv_scale = 15.0
+shader_param/scroll_speed = null
+shader_param/real_size = Vector2(1920, 1080)
+shader_param/tex = ExtResource( "3_85k5m" )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( "1_4ils3" )
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+script = ExtResource( "2_2nngi" )
+
+[node name="ColorRect" type="ColorRect" parent="BG"]
+material = SubResource( "ShaderMaterial_njd4n" )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Fields" type="Node2D" parent="."]
+script = ExtResource( "1_oug1n" )
+
+[node name="Score" type="Node2D" parent="."]
+script = ExtResource( "3_pa3di" )
+
+[node name="ScoreLabel1" parent="Score" instance=ExtResource( "4_13nv2" )]
+
+[node name="ScoreLabel2" parent="Score" instance=ExtResource( "4_13nv2" )]
+
+[node name="Players" type="Node2D" parent="."]
+script = ExtResource( "5_fxqbw" )
+
+[node name="GameOver" type="Node2D" parent="."]
+script = ExtResource( "6_mu8e1" )

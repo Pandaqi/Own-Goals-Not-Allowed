@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsudw6ipib3ds"]
+
+[ext_resource type="Script" path="res://objects/player/player.gd" id="1_sl0sd"]
+[ext_resource type="Script" path="res://objects/player/drawer.gd" id="3_3r6xp"]
+[ext_resource type="Script" path="res://objects/player/shaper.gd" id="3_r27qp"]
+[ext_resource type="PackedScene" uid="uid://bp11hydve7v03" path="res://objects/player/trail_particles.tscn" id="4_mg7vg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gmy82"]
+bounce = 1.0
+
+[node name="Player" type="RigidDynamicBody2D" groups=["Players"]]
+collision_layer = 3
+collision_mask = 3
+mass = 10.0
+physics_material_override = SubResource( "PhysicsMaterial_gmy82" )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+script = ExtResource( "1_sl0sd" )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Shaper" type="Node2D" parent="."]
+script = ExtResource( "3_r27qp" )
+
+[node name="Drawer" type="Node2D" parent="."]
+script = ExtResource( "3_3r6xp" )
+
+[node name="GPUParticles2D" parent="Drawer" instance=ExtResource( "4_mg7vg" )]
+scale_amount_min = 0.3
+scale_amount_max = 0.4

@@ -1,0 +1,45 @@
+[gd_scene load_steps=12 format=3 uid="uid://d4la8xs0ylxci"]
+
+[ext_resource type="Script" path="res://objects/field/field.gd" id="1_ssool"]
+[ext_resource type="Shader" path="res://objects/field/bg/field.gdshader" id="2_7vcgt"]
+[ext_resource type="Script" path="res://objects/field/drawer.gd" id="2_b60vy"]
+[ext_resource type="Script" path="res://objects/field/score.gd" id="2_i3ni3"]
+[ext_resource type="Texture2D" uid="uid://dy2tykebvuonn" path="res://objects/field/bg/field_shadow.png" id="2_r5q3u"]
+[ext_resource type="Texture2D" uid="uid://ckljk1uaikyvu" path="res://objects/field/bg/grass_texture.png" id="3_atvst"]
+[ext_resource type="PackedScene" uid="uid://dqvm82vydy50t" path="res://objects/field/score/score_label.tscn" id="3_i5ew7"]
+[ext_resource type="Script" path="res://objects/field/edges/edges.gd" id="3_nambx"]
+[ext_resource type="Script" path="res://objects/field/ball_module/balls.gd" id="4_grnwn"]
+[ext_resource type="Script" path="res://objects/field/players/players.gd" id="5_xtp7x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a6lye"]
+shader = ExtResource( "2_7vcgt" )
+shader_param/uv_scale = 2.0
+shader_param/blend = 0.3
+shader_param/tex = ExtResource( "3_atvst" )
+
+[node name="Field" type="Node2D"]
+script = ExtResource( "1_ssool" )
+
+[node name="Shadow" type="Sprite2D" parent="."]
+texture = ExtResource( "2_r5q3u" )
+
+[node name="Drawer" type="Node2D" parent="."]
+material = SubResource( "ShaderMaterial_a6lye" )
+script = ExtResource( "2_b60vy" )
+grass_color = Color(0.364706, 1, 0.278431, 1)
+
+[node name="Score" type="Node2D" parent="."]
+script = ExtResource( "2_i3ni3" )
+
+[node name="ScoreLabel0" parent="Score" instance=ExtResource( "3_i5ew7" )]
+
+[node name="ScoreLabel1" parent="Score" instance=ExtResource( "3_i5ew7" )]
+
+[node name="Balls" type="Node2D" parent="."]
+script = ExtResource( "4_grnwn" )
+
+[node name="Players" type="Node2D" parent="."]
+script = ExtResource( "5_xtp7x" )
+
+[node name="Edges" type="Node2D" parent="."]
+script = ExtResource( "3_nambx" )

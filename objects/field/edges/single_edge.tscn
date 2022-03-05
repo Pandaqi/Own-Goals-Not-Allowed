@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv2g1b83c1u2e"]
+
+[ext_resource type="Script" path="res://objects/field/edges/single_edge.gd" id="1_fyfl3"]
+[ext_resource type="Script" path="res://objects/field/edges/drawer.gd" id="2_reu2u"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k8mo2"]
+friction = 0.25
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wso35"]
+
+[node name="Edge" type="StaticBody2D"]
+physics_material_override = SubResource( "PhysicsMaterial_k8mo2" )
+script = ExtResource( "1_fyfl3" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( "RectangleShape2D_wso35" )
+
+[node name="Drawer" type="Node2D" parent="."]
+script = ExtResource( "2_reu2u" )

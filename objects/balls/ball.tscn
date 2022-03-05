@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bahdunxp5q1un"]
+
+[ext_resource type="Script" path="res://objects/balls/ball.gd" id="1_a8hnv"]
+[ext_resource type="PackedScene" uid="uid://bp11hydve7v03" path="res://objects/player/trail_particles.tscn" id="3_5phx3"]
+[ext_resource type="Script" path="res://objects/balls/drawer.gd" id="3_u2sxe"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2xb6w"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fijp1"]
+radius = 17.2627
+
+[node name="Ball" type="RigidDynamicBody2D" groups=["Balls"]]
+physics_material_override = SubResource( "PhysicsMaterial_2xb6w" )
+continuous_cd = 2
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+script = ExtResource( "1_a8hnv" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( "CircleShape2D_fijp1" )
+
+[node name="Drawer" type="Node2D" parent="."]
+script = ExtResource( "3_u2sxe" )
+
+[node name="GPUParticles2D" parent="Drawer" instance=ExtResource( "3_5phx3" )]
+
+[node name="NoGoalTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_ball_body_entered"]
+[connection signal="timeout" from="NoGoalTimer" to="." method="_on_no_goal_timer_timeout"]

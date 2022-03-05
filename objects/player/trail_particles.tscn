@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp11hydve7v03"]
+
+[ext_resource type="Texture2D" uid="uid://duy3l44flh3oc" path="res://objects/player/particle_cloud.png" id="1_ucwgg"]
+
+[sub_resource type="Curve" id="Curve_bfur0"]
+_data = [Vector2(0.005, 0), 0.0, 6.61157, 0, 0, Vector2(0.12, 0.954545), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.802139, 0.0, 0, 0]
+
+[node name="GPUParticles2D" type="CPUParticles2D"]
+show_behind_parent = true
+local_coords = false
+texture = ExtResource( "1_ucwgg" )
+gravity = Vector2(0, 0)
+angular_velocity_max = 200.0
+angle_max = 360.0
+scale_amount_min = 0.5
+scale_amount_max = 0.6
+scale_amount_curve = SubResource( "Curve_bfur0" )
