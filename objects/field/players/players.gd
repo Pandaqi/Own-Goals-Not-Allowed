@@ -22,6 +22,7 @@ func add_player(p_num : int, desired_pos = null):
 	else:
 		p.set_position(desired_pos)
 	
+	p.field = field
 	add_child(p)
 	
 	p.set_data(p_num, GDict.player_data[p_num].team)
@@ -93,3 +94,14 @@ func get_dist_to_closest(pos : Vector2) -> float:
 		closest_dist = dist
 	
 	return closest_dist
+
+func remove_all(data : Dictionary):
+	for i in range(players.size()-1,-1,-1):
+		var p = players[i]
+		if data.has('exclude'):
+			if p in data.exclude: continue
+		
+		if data.has('team'):
+			if p.team_num != data.team: continue
+		
+		remove_player_by_node(players[i])

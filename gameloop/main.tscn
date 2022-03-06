@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://5wkg5kv018aa"]
+[gd_scene load_steps=13 format=3 uid="uid://5wkg5kv018aa"]
 
 [ext_resource type="Script" path="res://gameloop/main.gd" id="1_4ils3"]
 [ext_resource type="Script" path="res://managers/field_manager/field_manager.gd" id="1_oug1n"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://managers/score/score.gd" id="3_pa3di"]
 [ext_resource type="PackedScene" uid="uid://irjchanwcytr" path="res://managers/score/score_label.tscn" id="4_13nv2"]
 [ext_resource type="Script" path="res://managers/players/players.gd" id="5_fxqbw"]
+[ext_resource type="Script" path="res://managers/powerups/powerups.gd" id="6_8eiew"]
 [ext_resource type="Script" path="res://managers/gameover/gameover.gd" id="6_mu8e1"]
 [ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="10_l8vrc"]
 [ext_resource type="PackedScene" uid="uid://bqcx2khxgh63y" path="res://managers/gameover/key_hint.tscn" id="11_0mq34"]
@@ -26,6 +27,12 @@ script = ExtResource( "1_oug1n" )
 
 [node name="Players" type="Node2D" parent="."]
 script = ExtResource( "5_fxqbw" )
+
+[node name="Powerups" type="Node2D" parent="."]
+script = ExtResource( "6_8eiew" )
+
+[node name="Timer" type="Timer" parent="Powerups"]
+one_shot = true
 
 [node name="Score" type="CanvasLayer" parent="."]
 script = ExtResource( "3_pa3di" )
@@ -205,3 +212,4 @@ scale = Vector2(0.5, 0.5)
 frame = 3
 
 [connection signal="no_fields_to_rearrange" from="Fields" to="GameOver" method="_on_fields_no_fields_to_rearrange"]
+[connection signal="timeout" from="Powerups/Timer" to="Powerups" method="_on_timer_timeout"]

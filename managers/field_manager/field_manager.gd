@@ -65,6 +65,7 @@ func remove_field_at_edge():
 
 func remove_field(node):
 	fields.erase(node)
+	node.gates.on_removal()
 	node.busy_removing = true
 	
 	play_bouncy_tween(node, false)
@@ -111,10 +112,12 @@ func rearrange_fields():
 		emit_signal("no_fields_to_rearrange")
 		return
 	
+	main_node.camera.focus_on_fields(calculate_left_edge(), calculate_right_edge())
+
+func relink_all_gates():
+	print("RELINKING GATES")
 	for f in fields:
 		f.gates.relink_gates()
-	
-	main_node.camera.focus_on_fields(calculate_left_edge(), calculate_right_edge())
 
 func calculate_left_edge():
 	if fields.size() <= 0: return 0
@@ -195,10 +198,12 @@ func play_bouncy_tween(node, is_reveal : bool = true):
 	
 	if is_reveal:
 		tw.tween_callback(node.post_tween_activate)
+		tw.tween_callback(self.relink_all_gates)
 	
 	else:
 		tw.tween_callback(func(): node.queue_free())
 		tw.tween_callback(rearrange_fields)
+		tw.tween_callback(self.relink_all_gates)
 
 func scored_in_goal(team_num : int, ball, own_goal : bool):
 	if main_node.gameover.has_been_triggered(): return

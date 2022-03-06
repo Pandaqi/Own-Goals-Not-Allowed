@@ -8,7 +8,6 @@ var gate_scene : PackedScene = preload("res://objects/gate/gate.tscn")
 
 func activate():
 	create_gates()
-	relink_gates()
 
 func create_gates():
 	var offset = 0.5 * field.get_width() - 0.5*field.edges.THICKNESS
@@ -25,6 +24,10 @@ func get_gate(num : int):
 	if num < 0 or num >= gates.size(): return null
 	return gates[num]
 
+func on_removal():
+	gates[0].destroy_powerup()
+	gates[1].destroy_powerup()
+
 func relink_gates():
 	if gates.size() <= 0: return
 	
@@ -35,12 +38,9 @@ func relink_gates():
 	var left_nb = fields[ (my_index - 1 + num_fields) % num_fields ]
 	var right_nb = fields[ (my_index + 1) % num_fields ]
 	
-	# TO DO: actually position them on the Y-axis
-	gates[0].position.y = get_random_height()
-	gates[1].position.y = get_random_height()
-	
+	# Only LEFT needed. (RIGHT will do our other side in time)
 	gates[0].link_with(left_nb.gates.get_gate(1))
-	gates[1].link_with(right_nb.gates.get_gate(0))
+	gates[0].update_position( get_random_height() )
 
 func get_random_height() -> float:
 	return (randf() - 0.5)*field.get_height() * 0.8 # ( shrink to ensure easily accessible from field)

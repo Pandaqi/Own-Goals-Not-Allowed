@@ -6,6 +6,7 @@ extends Node2D
 @onready var gameover = $GameOver
 @onready var BG = $BG
 @onready var camera = $Camera2D
+@onready var powerups = $Powerups
 
 signal on_resize(size)
 
@@ -28,6 +29,7 @@ func _ready():
 	on_viewport_changed()
 	
 	field_manager.activate()
+	powerups.activate()
 
 func on_viewport_changed():
 	var size = PREDEFINED_WINDOW_SIZE

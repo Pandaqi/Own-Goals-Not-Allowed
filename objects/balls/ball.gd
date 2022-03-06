@@ -4,13 +4,20 @@ const VEL_BOUNDS : Dictionary = { 'min': 30.0, 'max': 500.0 }
 var last_touch = null
 var teleport_pos = null
 var can_score : bool = true
+var field
 
 @onready var no_goal_timer : Timer = $NoGoalTimer
 @onready var drawer = $Drawer
 
+var type : String = "regular"
 
 func _ready():
 	GTween.tween_bounce(self)
+
+func set_type(tp : String):
+	type = tp
+	
+	# TO DO: update some visuals based on that type
 
 func plan_teleport(pos : Vector2):
 	teleport_pos = pos
@@ -32,9 +39,11 @@ func _integrate_forces(state):
 	cap_velocity(state)
 
 func cap_velocity(state):
+	var factor = field.powerups.get_slowdown_factor()
+	
 	var speed = state.linear_velocity.length()
 	var dir = state.linear_velocity.normalized()
-	var capped_speed = clamp(speed, VEL_BOUNDS.min, VEL_BOUNDS.max)
+	var capped_speed = clamp(speed, VEL_BOUNDS.min * factor, VEL_BOUNDS.max * factor)
 	var new_speed = dir * capped_speed
 	state.linear_velocity = new_speed
 

@@ -41,9 +41,18 @@ func is_own_goal(team_num, ball) -> bool:
 
 func scored_in_goal(team_num : int, ball):
 	var other_team = (team_num + 1) % 2
-	if is_own_goal(team_num, ball):
-		give_points_to(other_team, OWN_GOAL_BONUS)
-		return
+	var own_goal = is_own_goal(team_num, ball)
+	var points = 1
+	if own_goal: points = OWN_GOAL_BONUS
+	
+	if ball.type == 'five':
+		points = 5
+	if ball.type == 'double':
+		points *= 2.0
+	
+	give_points_to(other_team, points)
+	
+	if own_goal: return
 	
 	# RULE #1: The scoring player is removed here, as long as it's not their last one
 	var scoring_player = ball.get_last_touching_player()
@@ -54,9 +63,4 @@ func scored_in_goal(team_num : int, ball):
 	
 	# RULE #2: The losing team gets an extra player here, if it's missing (at least) one
 	var new_player_num = field.players.get_non_present_player_num_from_team(team_num)
-#	if new_player_num < 0 and not field.players.team_at_max_capacity(team_num):
-#		new_player_num = field.main_node.players.get_random_player_num_in_team(team_num)
-	
 	if new_player_num >= 0: field.players.add_player(new_player_num)
-
-	give_points_to(other_team, 1)

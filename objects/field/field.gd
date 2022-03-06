@@ -21,6 +21,7 @@ const FIELD_BOUNDS : Dictionary = { 'min': 220.0, 'max': 350.0 }
 @onready var edges = $Edges
 @onready var goaleffects = $GoalEffects
 @onready var gates = $Gates
+@onready var powerups = $Powerups
 
 func activate():
 	if randf() <= 0.5:
@@ -54,6 +55,15 @@ func set_random_width():
 	var rand_width = randf_range(FIELD_BOUNDS.min, FIELD_BOUNDS.max)
 	extents.x = min(rand_width, field_manager.get_max_available_width())
 
+func is_busy() -> bool:
+	return busy_initializing or busy_removing
+
+func is_left_field():
+	return field_manager.fields[0] == self
+
+func is_right_field():
+	return field_manager.fields[field_manager.fields.size() - 1] == self
+
 func resize():
 	extents.y = field_manager.get_max_height()
 	drawer.update()
@@ -75,3 +85,6 @@ func get_random_position_inside() -> Vector2:
 		if num_tries > 100.0: bad_pos = false
 	
 	return pos
+
+func reverse_goal_dir():
+	pass # TO DO

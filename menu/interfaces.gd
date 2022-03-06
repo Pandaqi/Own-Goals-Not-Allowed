@@ -40,13 +40,16 @@ func count_players_ready() -> int:
 		sum += 1
 	return sum
 
-# TO DO: Leads to double activations, doesn't work in general
 func on_player_removed(removed_interface):
+	# All interfaces BEFORE this one can stay the same
+	# All after them need to be recalculated
+	# (toggled on/off, or turned off definitely)
+	
 	var my_index = interfaces.find(removed_interface)
 	for i in range(my_index, interfaces.size()):
 		var interface = interfaces[i]
 		if i < GInput.get_player_count():
+			interface.deactivate()
 			interface.activate()
-			
-			if i < (interfaces.size() - 1):
-				interfaces[i+1].deactivate()
+		else:
+			interface.deactivate()

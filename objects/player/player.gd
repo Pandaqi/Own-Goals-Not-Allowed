@@ -10,9 +10,14 @@ var player_num : int = -1
 var team_num : int = -1
 
 var can_teleport : bool = false
+var field
+
+var speed_factor : float = 1.0
+var reverse : bool = false
 
 @onready var shaper = $Shaper
 @onready var drawer = $Drawer
+@onready var powerups = $Powerups
 @onready var sprite = $Sprite2D
 
 @onready var start_freeze_timer = $StartFreezeTimer
@@ -31,13 +36,21 @@ func handle_input(vec):
 	last_input = vec
 
 func _integrate_forces(state):
-	var wanted_vel = last_input * MOVE_SPEED
+	var wanted_vel = last_input * get_cur_move_speed()
 	var cur_vel = state.linear_velocity
+	
+	if reverse: wanted_vel *= -1
 	
 	cur_vel.x = move_toward(cur_vel.x, wanted_vel.x, AGILITY)
 	cur_vel.y = move_toward(cur_vel.y, wanted_vel.y, AGILITY)
 	
 	state.linear_velocity = cur_vel
+
+func change_speed_factor(df):
+	speed_factor = clamp(speed_factor + df, 0.4, 1.8)
+
+func get_cur_move_speed():
+	return MOVE_SPEED * field.powerups.get_slowdown_factor() * speed_factor
 
 func is_teleportable() -> bool:
 	return can_teleport

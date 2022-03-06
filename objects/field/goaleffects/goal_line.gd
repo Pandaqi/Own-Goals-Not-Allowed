@@ -7,6 +7,11 @@ var time : float = 0.0
 var max_amplitude : float = 5.0
 var wobble_speed : float = 5.0
 
+const MAX_Y_OFFSET : float = 65.0
+
+func set_color(col : Color):
+	default_color = col
+
 func create(from : Vector2, num_steps : int, length : float):
 	var step_size = length / num_steps
 	var new_points : Array = [from]
@@ -36,6 +41,8 @@ func _physics_process(dt):
 		point_velocities[i] += speed*dt*dist_to_center # move it back to center
 		point_velocities[i] += speed*dt*(dist_a + dist_b) # allow points around to pull on it
 		new_points[i] += Vector2.DOWN * point_velocities[i]
+		
+		new_points[i].y = clamp(new_points[i].y, original_points[i].y-MAX_Y_OFFSET, original_points[i].y+MAX_Y_OFFSET)
 
 	points = new_points
 

@@ -98,9 +98,11 @@ func update_from_field():
 	
 	var start = mid_top - 0.5*goal_width*Vector2.RIGHT
 	var num_steps : int = 30
+	lines[0].set_color(GDict.cfg.colors.teams[field.top_team])
 	lines[0].create(start, num_steps, goal_width)
 	
 	start = mid_bottom - 0.5*goal_width*Vector2.RIGHT
+	lines[1].set_color(GDict.cfg.colors.teams[field.bottom_team])
 	lines[1].create(start, num_steps, goal_width)
 
 func scored_in_goal(in_top_goal : bool, ball):
@@ -108,3 +110,9 @@ func scored_in_goal(in_top_goal : bool, ball):
 	if in_top_goal: node = lines[0]
 	
 	node.apply_impulse_at_closest_point(ball.global_transform.origin, 10.0)
+
+func shrink_goals():
+	pass # TO DO
+
+func grow_goals():
+	pass # TO DO

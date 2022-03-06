@@ -22,6 +22,7 @@ func get_random_vector() -> Vector2:
 func create_ball():
 	var b = ball_scene.instantiate()
 	b.set_position(Vector2.ZERO)
+	b.field = field
 	balls.append(b)
 	add_child(b)
 	
@@ -58,7 +59,8 @@ func scored_in_goal(team_num : int, ball, top_goal : bool):
 	field.main_node.field_manager.scored_in_goal(team_num, ball, own_goal)
 	
 	destroy_ball(ball)
-	create_ball()
+	
+	if balls.size() <= 0: create_ball()
 
 func get_dist_to_closest(pos : Vector2) -> float:
 	var closest_dist : float = INF
@@ -69,4 +71,7 @@ func get_dist_to_closest(pos : Vector2) -> float:
 		closest_dist = dist
 	
 	return closest_dist
-		
+
+func change_type_to(tp : String):
+	for b in balls:
+		b.set_type(tp)

@@ -31,6 +31,7 @@ func count_instances_of(p_num : int) -> int:
 	var all_fields = main_node.field_manager.get_all_fields()
 	var sum : int = 0
 	for f in all_fields:
+		if f.is_busy(): continue
 		sum += f.players.count_instances_of(p_num)
 	return sum
 
@@ -48,4 +49,17 @@ func handle_players_without_character():
 		if count_instances_of(i) > 0: continue
 		var f = main_node.field_manager.get_random_field()
 		if f == null: continue
-		f.add_player(i)
+		f.players.add_player(i)
+
+func execute_powerup_for_all(p_num : int, node):
+	var list : Array = get_all_players_with_num(p_num)
+	for p in list:
+		p.powerups.grab(node)
+
+func get_all_players_with_num(p_num : int) -> Array:
+	var players = get_tree().get_nodes_in_group("Players")
+	var list : Array = []
+	for p in players:
+		if p.player_num != p_num: continue
+		list.append(p)
+	return list

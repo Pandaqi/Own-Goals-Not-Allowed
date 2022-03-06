@@ -397,6 +397,7 @@ func remove_player(player_num : int = -1):
 	
 	# figure out our device id and type
 	var device_id = device_order[player_num].device
+	var split = get_split_status_for(player_num)
 	var is_keyboard = (device_id < 0)
 
 	if not device_already_registered(device_id): return ERR_NOTHING_TO_REMOVE
@@ -414,7 +415,15 @@ func remove_player(player_num : int = -1):
 			if devices[id][i] <= player_num: continue
 			devices[id][i] -= 1
 	
-	if is_keyboard: num_keyboard_players -= 1
+	# ensure KEYBOARD SPLITS are also moved down by 1
+	# (if they are later than our removed split)
+	if is_keyboard: 
+		num_keyboard_players -= 1
+		
+		for obj in device_order:
+			if obj.device != -1: continue
+			if obj.splits[0] < split: continue
+			obj.splits[0] -= 1
 
 	return device_id
 
