@@ -49,6 +49,7 @@ func reset_last_touch():
 	drawer.reset_color()
 
 func get_last_touching_player():
+	if not is_instance_valid(last_touch): return null
 	return last_touch
 
 # NOTE: this is often the only thing we need

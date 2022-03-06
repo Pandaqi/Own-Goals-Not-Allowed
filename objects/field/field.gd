@@ -2,6 +2,7 @@ extends Node2D
 
 var extents : Vector2 = Vector2.ZERO
 var busy_initializing : bool = false
+var busy_removing : bool = false
 
 var top_team : int = 0
 var bottom_team : int = 1
@@ -19,6 +20,7 @@ const FIELD_BOUNDS : Dictionary = { 'min': 220.0, 'max': 350.0 }
 @onready var players = $Players
 @onready var edges = $Edges
 @onready var goaleffects = $GoalEffects
+@onready var gates = $Gates
 
 func activate():
 	if randf() <= 0.5:
@@ -35,6 +37,7 @@ func activate():
 func post_tween_activate():
 	balls.activate()
 	players.activate()
+	gates.activate()
 	
 	busy_initializing = false
 

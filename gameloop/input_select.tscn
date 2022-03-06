@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bx713grcpa20d"]
+
+[ext_resource type="Script" path="res://gameloop/input_select.gd" id="1_ivkme"]
+[ext_resource type="PackedScene" uid="uid://c4eatuujkhsr" path="res://objects/bg/BG.tscn" id="1_u1y8k"]
+[ext_resource type="Texture2D" uid="uid://bewiosibuika" path="res://menu/main_menu_explanation.png" id="3_pe2sd"]
+[ext_resource type="Texture2D" uid="uid://come15f62wcy7" path="res://menu/itch_logo_no_bg.png" id="4_wdd04"]
+[ext_resource type="PackedScene" uid="uid://do6au1ao8iuwu" path="res://menu/interface/interface.tscn" id="5_auwjo"]
+[ext_resource type="Script" path="res://menu/interfaces.gd" id="5_h4jq3"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource( "1_ivkme" )
+
+[node name="BG" parent="." instance=ExtResource( "1_u1y8k" )]
+
+[node name="Sidebar" type="Node2D" parent="."]
+
+[node name="Explanation" type="Sprite2D" parent="Sidebar"]
+position = Vector2(163, 466)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource( "3_pe2sd" )
+
+[node name="Logo" type="Sprite2D" parent="Sidebar"]
+position = Vector2(164, 125)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource( "4_wdd04" )
+
+[node name="Interfaces" type="Node2D" parent="."]
+script = ExtResource( "5_h4jq3" )
+
+[node name="Interface1" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+position = Vector2(471, 214)
+
+[node name="Interface2" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+position = Vector2(786, 214)
+
+[node name="Interface3" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+position = Vector2(1099, 214)
+
+[node name="Interface4" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+position = Vector2(471, 488)
+
+[node name="Interface5" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+position = Vector2(786, 488)
+
+[node name="Interface6" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+position = Vector2(1099, 488)

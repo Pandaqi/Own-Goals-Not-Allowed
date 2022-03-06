@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d4la8xs0ylxci"]
+[gd_scene load_steps=15 format=3 uid="uid://d4la8xs0ylxci"]
 
 [ext_resource type="Script" path="res://objects/field/field.gd" id="1_ssool"]
 [ext_resource type="Shader" path="res://objects/field/bg/field.gdshader" id="2_7vcgt"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://objects/field/players/players.gd" id="5_xtp7x"]
 [ext_resource type="Script" path="res://objects/field/goaleffects/goaleffects.gd" id="11_bvkdh"]
 [ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="11_c461m"]
+[ext_resource type="Script" path="res://objects/field/gates/gates.gd" id="13_db8g1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a6lye"]
 shader = ExtResource( "2_7vcgt" )
@@ -82,3 +83,6 @@ text = "OWN GOAL!"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Gates" type="Node2D" parent="."]
+script = ExtResource( "13_db8g1" )

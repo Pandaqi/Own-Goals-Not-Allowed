@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://do6au1ao8iuwu"]
+
+[ext_resource type="Script" path="res://menu/interface/interface.gd" id="1_pqbs0"]
+[ext_resource type="Texture2D" uid="uid://bt3nlbe2ncsll" path="res://menu/interface/player_interface_bg.png" id="2_2rm8y"]
+[ext_resource type="Texture2D" uid="uid://dmphcxxwstghc" path="res://menu/player_interface_remove.png" id="2_003ej"]
+[ext_resource type="Script" path="res://menu/interface/remove_area.gd" id="2_yd8o5"]
+[ext_resource type="Shader" path="res://menu/interface/interface.gdshader" id="3_8lrn5"]
+[ext_resource type="Texture2D" uid="uid://yd0gb6kcb1qk" path="res://menu/player_interface_ready.png" id="6_t1bpg"]
+[ext_resource type="Texture2D" uid="uid://ciht57uhjranq" path="res://menu/interface/key_hints_menu.png" id="7_j3pv8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vef0"]
+shader = ExtResource( "3_8lrn5" )
+shader_param/num = 0.0
+shader_param/reverse = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7v3vk"]
+size = Vector2(46, 189)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0t30"]
+size = Vector2(276, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wui7"]
+size = Vector2(207, 20)
+
+[node name="Interface" type="Node2D"]
+position = Vector2(494, 189)
+script = ExtResource( "1_pqbs0" )
+
+[node name="BG" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource( "2_2rm8y" )
+hframes = 2
+
+[node name="RemoveArea" type="Area2D" parent="."]
+position = Vector2(-97, 0)
+script = ExtResource( "2_yd8o5" )
+
+[node name="Sprite2D" type="Sprite2D" parent="RemoveArea"]
+material = SubResource( "ShaderMaterial_4vef0" )
+scale = Vector2(0.4, 0.4)
+texture = ExtResource( "2_003ej" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RemoveArea"]
+position = Vector2(0, 0.5)
+shape = SubResource( "RectangleShape2D_7v3vk" )
+
+[node name="ReadyArea" type="Area2D" parent="."]
+position = Vector2(97, 0)
+script = ExtResource( "2_yd8o5" )
+reverse = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ReadyArea"]
+material = SubResource( "ShaderMaterial_4vef0" )
+scale = Vector2(0.4, 0.4)
+texture = ExtResource( "6_t1bpg" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReadyArea"]
+position = Vector2(0, 0.5)
+shape = SubResource( "RectangleShape2D_7v3vk" )
+
+[node name="KeyHint" type="Sprite2D" parent="."]
+position = Vector2(0, 55)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource( "7_j3pv8" )
+hframes = 5
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -93)
+shape = SubResource( "RectangleShape2D_s0t30" )
+
+[node name="Bottom" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 94)
+shape = SubResource( "RectangleShape2D_s0t30" )
+
+[node name="Right" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(120, 0)
+rotation = 1.5708
+shape = SubResource( "RectangleShape2D_1wui7" )
+
+[node name="Left" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-119, 0)
+rotation = 1.5708
+shape = SubResource( "RectangleShape2D_1wui7" )
+
+[connection signal="body_entered" from="RemoveArea" to="RemoveArea" method="_on_remove_area_body_entered"]
+[connection signal="body_exited" from="RemoveArea" to="RemoveArea" method="_on_remove_area_body_exited"]
+[connection signal="completed" from="RemoveArea" to="." method="_on_remove_area_completed"]
+[connection signal="body_entered" from="ReadyArea" to="ReadyArea" method="_on_remove_area_body_entered"]
+[connection signal="body_exited" from="ReadyArea" to="ReadyArea" method="_on_remove_area_body_exited"]
+[connection signal="completed" from="ReadyArea" to="." method="_on_ready_area_completed"]

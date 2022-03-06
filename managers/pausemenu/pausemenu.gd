@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 @onready var main_node = get_parent()
 

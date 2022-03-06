@@ -14,9 +14,14 @@ func create_initial_players():
 		players_by_num[str(i)] = []
 		add_player(i)
 
-func add_player(p_num : int):
+func add_player(p_num : int, desired_pos = null):
 	var p = player_scene.instantiate()
-	p.set_position(field.get_random_position_inside())
+	
+	if (desired_pos == null):
+		p.set_position(field.get_random_position_inside())
+	else:
+		p.set_position(desired_pos)
+	
 	add_child(p)
 	
 	p.set_data(p_num, GDict.player_data[p_num].team)
@@ -27,10 +32,14 @@ func add_player(p_num : int):
 	play_add_tween(p)
 
 func remove_player(p_num : int):
-	var node_to_remove = players_by_num[str(p_num)].pop_back()
-	players.erase(node_to_remove)
-	
-	play_remove_tween(node_to_remove)
+	var node_to_remove = players_by_num[str(p_num)][0]
+	remove_player_by_node(node_to_remove)
+
+func remove_player_by_node(node):
+	var p_num = node.player_num
+	players_by_num[str(p_num)].erase(node)
+	players.erase(node)
+	play_remove_tween(node)
 
 func play_add_tween(node):
 	node.set_scale(Vector2.ZERO)
@@ -44,7 +53,7 @@ func play_remove_tween(node):
 	var tw = get_tree().create_tween()
 	tw.tween_property(node, "scale", Vector2.ONE*1.2, 0.2)
 	tw.tween_property(node, "scale", Vector2.ZERO, 0.2)
-	tw.tween_callback(func(): node.queue_free())
+	tw.tween_callback(node.queue_free)
 
 func give_input(p_num : int, vec : Vector2):
 	for p in players_by_num[str(p_num)]:

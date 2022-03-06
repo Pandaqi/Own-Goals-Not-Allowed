@@ -6,7 +6,6 @@ const NUM_STARTING_FIELDS : int = 2
 const PADDING : Vector2 = Vector2(40, 40)
 const PADDING_BETWEEN_FIELDS : float = 40.0
 
-var cur_width : float = 0.0
 var fields : Array = []
 var cur_vp : Vector2
 
@@ -34,26 +33,99 @@ func create_starting_fields():
 
 func add_field():
 	var f = field_scene.instantiate()
-	fields.append(f)
 	add_child(f)
 	
 	f.activate()
-	cur_width += f.get_width()
 	
+	var left_edge = calculate_left_edge()
+	var right_edge = calculate_right_edge()
+	
+	if fields.size() <= 0:
+		f.set_position(Vector2.ZERO)
+	
+	else:
+		var place_left : bool = false
+		if randf() <= 0.5: place_left = true
+		
+		if place_left: f.set_position(Vector2(left_edge - 0.5*f.extents.x, 0))
+		else: f.set_position(Vector2(right_edge + 0.5*f.extents.x, 0))
+	
+	fields.append(f)
+	
+	sort_fields_horizontally()
 	play_bouncy_tween(f)
 	
 	rearrange_fields()
 
-func remove_field():
-	var f = fields.pop_back()
+func remove_field_at_edge():
+	if randf() <= 0.5:
+		remove_field(fields[0])
+	else:
+		remove_field(fields[fields.size() - 1])
+
+func remove_field(node):
+	fields.erase(node)
+	node.busy_removing = true
 	
-	cur_width -= f.get_width()
+	play_bouncy_tween(node, false)
 	
-	play_bouncy_tween(f, false)
+	sort_fields_horizontally()
+	rearrange_fields()
+	
+	main_node.score.save_perma_score(0, node.score.get_score(0))
+	main_node.score.save_perma_score(1, node.score.get_score(1))
+	update_global_scores()
+	
+	main_node.players.handle_players_without_character()
+
+func get_random_field():
+	if fields.size() <= 0: return null
+	return fields[randi() % fields.size()]
+
+func sort_fields_horizontally():
+	fields.sort_custom(horizontal_field_sort)
+	
+	print("SORTING")
+	for f in fields:
+		print(f.position.x)
+
+func horizontal_field_sort(a,b):
+	return a.position.x < b.position.x
+
+func find_furthest_field(dir):
+	var dist : float = -dir * INF
+	var field
+	
+	for f in fields:
+		var cur_dist = f.position.length()
+		if dir < 0 and cur_dist > dist: continue
+		if dir > 0 and cur_dist < dist: continue
+		
+		dist = cur_dist
+		field = f
+	
+	return field
 
 func rearrange_fields():
-	emit_signal("no_fields_to_rearrange")
+	if fields.size() <= 0: 
+		emit_signal("no_fields_to_rearrange")
+		return
 	
+	for f in fields:
+		f.gates.relink_gates()
+	
+	main_node.camera.focus_on_fields(calculate_left_edge(), calculate_right_edge())
+
+func calculate_left_edge():
+	if fields.size() <= 0: return 0
+	return fields[0].position.x - 0.5*fields[0].extents.x - PADDING_BETWEEN_FIELDS
+
+func calculate_right_edge():
+	if fields.size() <= 0: return 0
+	var idx = fields.size() - 1
+	return fields[idx].position.x + 0.5*fields[idx].extents.x + PADDING_BETWEEN_FIELDS
+
+func old_rearrange_fields():
 	self.set_position(0.5 * cur_vp)
 	
 	# first value to offset the full width
@@ -63,7 +135,6 @@ func rearrange_fields():
 		x_pos += 0.5*f.get_width()
 		f.set_position(Vector2(x_pos, 0))
 		x_pos += 0.5*f.get_width() + PADDING_BETWEEN_FIELDS
-		
 
 func get_max_height() -> float:
 	return cur_vp.y - 2*PADDING.y
@@ -72,7 +143,7 @@ func get_max_width() -> float:
 	return cur_vp.x - 2*PADDING.x
 
 func get_cur_total_width() -> float:
-	return cur_width + (fields.size() - 1)*PADDING_BETWEEN_FIELDS
+	return (calculate_right_edge() - calculate_left_edge())
 
 func get_max_available_width() -> float:
 	return get_max_width() - get_cur_total_width()
@@ -94,7 +165,7 @@ func get_all_fields() -> Array:
 
 func remove_all_fields():
 	while fields.size() > 0:
-		remove_field()
+		remove_field(fields[0])
 
 func show_all_fields():
 	var tw = get_tree().create_tween()
@@ -128,3 +199,17 @@ func play_bouncy_tween(node, is_reveal : bool = true):
 	else:
 		tw.tween_callback(func(): node.queue_free())
 		tw.tween_callback(rearrange_fields)
+
+func scored_in_goal(team_num : int, ball, own_goal : bool):
+	if main_node.gameover.has_been_triggered(): return
+	if not own_goal: return
+	
+	var add_field_prob = 1.0 / (fields.size() - 0.5)
+	
+	if fields.size() <= 1: add_field_prob = 1.0
+	if get_max_available_width() < 250: add_field_prob = 0.0
+	
+	if randf() <= add_field_prob:
+		add_field()
+	else:
+		remove_field_at_edge()

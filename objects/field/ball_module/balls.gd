@@ -27,6 +27,10 @@ func create_ball():
 	
 	b.apply_central_impulse(STARTING_IMPULSE * get_random_vector())
 
+func destroy_ball(node):
+	balls.erase(node)
+	node.queue_free()
+
 func _physics_process(dt):
 	check_for_goals()
 
@@ -51,7 +55,10 @@ func scored_in_goal(team_num : int, ball, top_goal : bool):
 	field.score.scored_in_goal(team_num, ball)
 	field.edges.scored_in_goal(top_goal, ball)
 	ball.on_goal_scored()
-	ball.plan_teleport(global_position + Vector2.ZERO)
+	field.main_node.field_manager.scored_in_goal(team_num, ball, own_goal)
+	
+	destroy_ball(ball)
+	create_ball()
 
 func get_dist_to_closest(pos : Vector2) -> float:
 	var closest_dist : float = INF

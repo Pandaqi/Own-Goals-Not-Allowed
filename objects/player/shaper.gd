@@ -3,7 +3,7 @@ extends Node2D
 @onready var body = get_parent()
 
 func activate():
-	var original_shape = body.main_node.players.available_shapes[body.player_num]
+	var original_shape = GDict.available_shapes[body.player_num]
 	var shape = reposition_around_centroid(original_shape)
 	
 	var col_node = get_parent().get_node("CollisionPolygon2D")

@@ -14,6 +14,9 @@ var score : Array = [0,0]
 	$ScoreLabel1
 ]
 
+func get_score(t_num : int):
+	return score[t_num]
+
 func update_from_field():
 	var size = field.get_size()
 	score_labels[0].set_position(Vector2(0, LABEL_OFFSET_FROM_GOAL*size.y - 0.5*size.y))

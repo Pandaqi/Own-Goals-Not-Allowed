@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 @onready var main_node = get_parent()
 @onready var container = $Container
@@ -32,7 +32,7 @@ func game_over(winning_team : int):
 	# create two confettis, one rotated upside down, to get a full circle of confetti!
 	for i in range(2):
 		var c = confetti_particles.instantiate()
-		main_node.add_child(c)
+		main_node.score.add_child(c)
 		c.set_scale(Vector2.ONE*3)
 		c.set_position(0.5*get_viewport().size)
 		

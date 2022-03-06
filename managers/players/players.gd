@@ -2,17 +2,12 @@ extends Node2D
 
 @onready var main_node = get_parent()
 
-const PREDEFINED_SHAPE_SCALE : float = 1.0
-var available_shapes : Array = []
-var predefined_shape_list = preload("res://objects/shapes/predefined_shape_list.tscn")
-
 var teams : Array = [
 	[],
 	[]
 ]
 
 func activate():
-	load_predefined_shapes()
 	cache_team_members()
 
 func cache_team_members():
@@ -46,21 +41,11 @@ func get_random_player_num_in_team(t_num : int):
 	var list = get_team(t_num)
 	return list[randi() % list.size()]
 
-# SHape loading
-func load_predefined_shapes():
-	var list = predefined_shape_list.instantiate()
-	for child in list.get_children():
-		if not (child is CollisionPolygon2D): continue
-		
-		var key = String(child.name).to_lower()
-		var val = scale_shape( Array(child.polygon) )
-		available_shapes.append(val)
+func handle_players_without_character():
+	if main_node.gameover.has_been_triggered(): return
 	
-	available_shapes.shuffle()
-
-# NOTE: Points are already around centroid, and shaper node will do that again anyway, so just scale only
-func scale_shape(points):
-	var new_points = []
-	for p in points:
-		new_points.append(p * PREDEFINED_SHAPE_SCALE)
-	return new_points
+	for i in range(GInput.get_player_count()):
+		if count_instances_of(i) > 0: continue
+		var f = main_node.field_manager.get_random_field()
+		if f == null: continue
+		f.add_player(i)

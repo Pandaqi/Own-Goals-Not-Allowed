@@ -309,13 +309,15 @@ func check_remove_controller(ev):
 	
 	if not device_already_registered(ev.device): return ERR_NOTHING_TO_REMOVE
 	
-	return remove_player('controller', ev.device)
+	var p_num = -1 # TO DO: find player num from device id?
+	return remove_player(p_num)
 
 func check_remove_keyboard(ev):
 	if not ev.is_action_released("remove_keyboard_player"): return ERR_DEF
 	if get_num_keyboard_players() <= 0: return ERR_NOTHING_TO_REMOVE
 	
-	return remove_player('keyboard')
+	var p_num = find_last_keyboard_player()
+	return remove_player(p_num)
 
 #
 # Handle (un)registering input devices
@@ -345,7 +347,7 @@ func unsplit_controller(id : int) -> Dictionary:
 	
 	# remove last player completely
 	var last_player_num = devices[str(id)][1]
-	remove_player('controller', last_player_num)
+	remove_player(last_player_num)
 
 	# update remaining owner to full control
 	var cur_player_num = devices[str(id)][0]
@@ -390,14 +392,13 @@ func add_new_player(type, id : int = -1, custom_splits : Array = []) -> int:
 	return id
 
 # NOTE: we receive a PLAYER NUMBER, not device ID, as that doesn't make sense here
-func remove_player(type, player_num : int = -1):
+func remove_player(player_num : int = -1):
 	if no_devices_registered(): return ERR_NOTHING_TO_REMOVE
 	
-	var is_keyboard = (player_num < 0)
-	if is_keyboard: player_num = find_last_keyboard_player()
-
-	# figure out our device id
+	# figure out our device id and type
 	var device_id = device_order[player_num].device
+	var is_keyboard = (device_id < 0)
+
 	if not device_already_registered(device_id): return ERR_NOTHING_TO_REMOVE
 
 	# remove the player completely
@@ -413,7 +414,7 @@ func remove_player(type, player_num : int = -1):
 			if devices[id][i] <= player_num: continue
 			devices[id][i] -= 1
 	
-	if type == "keyboard": num_keyboard_players -= 1
+	if is_keyboard: num_keyboard_players -= 1
 
 	return device_id
 
@@ -515,9 +516,6 @@ func find_last_keyboard_player():
 				return i
 	
 	return -1
-
-func remove_last_keyboard_player():
-	return remove_player("keyboard")
 
 func player_doesnt_exist(player_num : int) -> bool:
 	return player_num >= device_order.size()
