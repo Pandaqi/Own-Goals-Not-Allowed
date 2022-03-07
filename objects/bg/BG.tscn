@@ -19,3 +19,4 @@ script = ExtResource( "1_8skgo" )
 material = SubResource( "ShaderMaterial_njd4n" )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2

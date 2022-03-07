@@ -31,6 +31,7 @@ func finish_deactivation():
 func toggle():
 	if tween != null and tween.is_running(): return
 	
+	GAudio.play_static_sound("ui_button")
 	if active: deactivate()
 	else: activate()
 
@@ -43,9 +44,11 @@ func _input(ev):
 	if not active: return
 	
 	if ev.is_action_released("pause_menu_exit"):
+		GAudio.play_static_sound("ui_button")
 		get_tree().paused = false
-		pass # TO DO: exit to main menu/input select
+		get_tree().change_scene("res://gameloop/input_select.tscn")
 	
 	elif ev.is_action_released("pause_menu_restart"):
+		GAudio.play_static_sound("ui_button")
 		get_tree().paused = false
 		get_tree().reload_current_scene()

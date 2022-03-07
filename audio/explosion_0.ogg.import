@@ -1,0 +1,16 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOGGVorbis"
+uid="uid://bg8htqtm2uynn"
+path="res://.godot/imported/explosion_0.ogg-d4cca73658dcd92bf95643ede6355272.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/explosion_0.ogg"
+dest_files=["res://.godot/imported/explosion_0.ogg-d4cca73658dcd92bf95643ede6355272.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0

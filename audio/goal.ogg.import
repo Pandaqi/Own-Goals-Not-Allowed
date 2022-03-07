@@ -1,0 +1,16 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOGGVorbis"
+uid="uid://c6xjao8umoddt"
+path="res://.godot/imported/goal.ogg-c0bb167b4b942bb4e1cca3e6e92c6b25.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/goal.ogg"
+dest_files=["res://.godot/imported/goal.ogg-c0bb167b4b942bb4e1cca3e6e92c6b25.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0

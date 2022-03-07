@@ -1,0 +1,16 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOGGVorbis"
+uid="uid://b3ttl7axkdf5o"
+path="res://.godot/imported/ui_button.ogg-075983ff46c1d6d21ab6192bcee78f64.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/ui_button.ogg"
+dest_files=["res://.godot/imported/ui_button.ogg-075983ff46c1d6d21ab6192bcee78f64.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0

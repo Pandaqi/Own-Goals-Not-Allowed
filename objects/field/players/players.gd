@@ -10,12 +10,13 @@ func activate():
 	create_initial_players()
 
 func create_initial_players():
-	for i in range(GInput.get_player_count()):
+	var num_players = field.main_node.num_players
+	for i in range(num_players):
 		players_by_num[str(i)] = []
 	
 	var first_field = field.main_node.field_manager.count() == 1
 	if first_field:
-		for i in range(GInput.get_player_count()):
+		for i in range(num_players):
 			add_player(i)
 	
 	else:
@@ -75,6 +76,9 @@ func give_input(p_num : int, vec : Vector2):
 	for p in players_by_num[str(p_num)]:
 		p.handle_input(vec)
 
+func get_with_player_num(p_num : int) -> Array:
+	return players_by_num[str(p_num)]
+
 func count_instances_of(p_num : int) -> int:
 	return players_by_num[str(p_num)].size()
 
@@ -88,9 +92,9 @@ func count_instances_of_team(t_num : int) -> int:
 func team_at_max_capacity(t_num : int) -> bool:
 	return count_instances_of_team(t_num) >= get_max_capacity()
 
-# TO DO: finetune this
+# TO DO: finetune this => not used ATM though
 func get_max_capacity():
-	return GInput.get_player_count() + 2
+	return field.main_node.num_real_players + 2
 
 func get_non_present_player_num_from_team(t_num : int) -> int:
 	var all_players_in_team = field.main_node.players.get_team(t_num)

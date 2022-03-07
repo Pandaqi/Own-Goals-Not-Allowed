@@ -58,9 +58,9 @@ func _input(ev):
 	if not active: return
 	
 	if ev.is_action_released("game_over_restart"):
+		GAudio.play_static_sound("ui_button")
 		get_tree().reload_current_scene()
 	
 	elif ev.is_action_released("game_over_back"):
-		pass
-		
-		# TO DO: change scene to main menu/input select => get_tree().change_scene_to()
+		GAudio.play_static_sound("ui_button")
+		get_tree().change_scene("res://gameloop/input_select.tscn")

@@ -28,7 +28,17 @@ GAudio="*res://globals/global_audio.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/fullscreen=true
 window/stretch/mode="canvas_items"
+
+[importer_defaults]
+
+mp3={
+"loop": false
+}
+oggvorbisstr={
+"loop": false
+}
 
 [physics]
 

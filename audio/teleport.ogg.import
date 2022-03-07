@@ -1,0 +1,16 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOGGVorbis"
+uid="uid://htwtnv5q1c8b"
+path="res://.godot/imported/teleport.ogg-cb28edb81b779b55a22a103a21a86584.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/teleport.ogg"
+dest_files=["res://.godot/imported/teleport.ogg-cb28edb81b779b55a22a103a21a86584.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0

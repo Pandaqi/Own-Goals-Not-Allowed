@@ -2,6 +2,7 @@ extends RigidDynamicBody2D
 
 @onready var main_node = get_node("/root/Main")
 
+const BOT_MOVE_SPEED : float = 170.0
 const MOVE_SPEED : float = 280.0
 const AGILITY : float = 5.0
 var last_input : Vector2 = Vector2.ZERO
@@ -10,10 +11,12 @@ var player_num : int = -1
 var team_num : int = -1
 
 var can_teleport : bool = false
-var field
+var field = null
 
 var speed_factor : float = 1.0
 var reverse : bool = false
+
+var is_bot : bool = false
 
 var busy_removing : bool = false
 var busy_adding : bool = false
@@ -31,6 +34,8 @@ func _ready():
 func set_data(p_num : int, t_num : int):
 	player_num = p_num
 	team_num = t_num
+	
+	is_bot = (player_num >= GInput.get_player_count())
 	
 	sprite.set_frame(GDict.available_faces[p_num])
 	shaper.activate()
@@ -65,7 +70,11 @@ func change_speed_factor(df : float):
 	speed_factor = clamp(speed_factor + df, 0.4, 1.8)
 
 func get_cur_move_speed():
-	return MOVE_SPEED * field.powerups.get_slowdown_factor() * speed_factor
+	if field == null: return MOVE_SPEED
+	
+	var base_speed = MOVE_SPEED
+	if is_bot: base_speed = BOT_MOVE_SPEED
+	return base_speed * field.powerups.get_slowdown_factor() * speed_factor
 
 func is_teleportable() -> bool:
 	return can_teleport and not is_busy()

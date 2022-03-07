@@ -11,7 +11,7 @@ func activate():
 	cache_team_members()
 
 func cache_team_members():
-	for i in range(GInput.get_player_count()):
+	for i in range(main_node.num_players):
 		var data = GDict.player_data[i]
 		teams[data.team].append(i)
 	
@@ -23,7 +23,7 @@ func _physics_process(dt):
 func poll_input():
 	var all_fields = main_node.field_manager.get_all_fields()
 	
-	for i in range(GInput.get_player_count()):
+	for i in range(main_node.num_real_players):
 		var vec : Vector2 = GInput.get_move_vec(i)
 		for f in all_fields:
 			if f.busy_initializing: continue
@@ -47,7 +47,7 @@ func get_random_player_num_in_team(t_num : int):
 func handle_players_without_character():
 	if main_node.gameover.has_been_triggered(): return
 	
-	for i in range(GInput.get_player_count()):
+	for i in range(main_node.num_players):
 		if count_instances_of(i) > 0: continue
 		var f = main_node.field_manager.get_random_field()
 		if f == null: continue

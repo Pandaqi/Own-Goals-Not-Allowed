@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var main_node = get_parent()
 
-const NUM_STARTING_FIELDS : int = 2
+const NUM_STARTING_FIELDS : int = 1
 const PADDING : Vector2 = Vector2(40, 40)
 const PADDING_BETWEEN_FIELDS : float = 40.0
 

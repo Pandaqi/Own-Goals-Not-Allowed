@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bx713grcpa20d"]
+[gd_scene load_steps=14 format=3 uid="uid://bx713grcpa20d"]
 
 [ext_resource type="Script" path="res://gameloop/input_select.gd" id="1_ivkme"]
 [ext_resource type="PackedScene" uid="uid://c4eatuujkhsr" path="res://objects/bg/BG.tscn" id="1_u1y8k"]
@@ -6,6 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://come15f62wcy7" path="res://menu/itch_logo_no_bg.png" id="4_wdd04"]
 [ext_resource type="PackedScene" uid="uid://do6au1ao8iuwu" path="res://menu/interface/interface.tscn" id="5_auwjo"]
 [ext_resource type="Script" path="res://menu/interfaces.gd" id="5_h4jq3"]
+[ext_resource type="Texture2D" uid="uid://b1pkp4oa84maa" path="res://menu/quit_btn.png" id="7_dj4ft"]
+[ext_resource type="Script" path="res://menu/clickable_sprite.gd" id="7_la2fx"]
+[ext_resource type="Texture2D" uid="uid://jxbrgfg7t3q6" path="res://menu/bot_btn.png" id="9_0x66q"]
+[ext_resource type="Script" path="res://menu/bot_btn.gd" id="9_flvv1"]
+[ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="11_4xvet"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_afbus"]
+size = Vector2(57, 63)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxxq0"]
+size = Vector2(121, 63)
 
 [node name="Main" type="Node2D"]
 script = ExtResource( "1_ivkme" )
@@ -44,3 +55,44 @@ position = Vector2(786, 488)
 
 [node name="Interface6" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
 position = Vector2(1099, 488)
+
+[node name="CornerButtons" type="Node2D" parent="."]
+
+[node name="QuitBtn" type="Area2D" parent="CornerButtons"]
+position = Vector2(1236, 51)
+script = ExtResource( "7_la2fx" )
+
+[node name="Sprite2D" type="Sprite2D" parent="CornerButtons/QuitBtn"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource( "7_dj4ft" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerButtons/QuitBtn"]
+position = Vector2(0.5, -24.5)
+shape = SubResource( "RectangleShape2D_afbus" )
+
+[node name="BotBtn" type="Area2D" parent="CornerButtons"]
+position = Vector2(1140, 51)
+script = ExtResource( "9_flvv1" )
+
+[node name="Sprite2D" type="Sprite2D" parent="CornerButtons/BotBtn"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource( "9_0x66q" )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CornerButtons/BotBtn"]
+position = Vector2(-0.5, -24.5)
+shape = SubResource( "RectangleShape2D_oxxq0" )
+
+[node name="Label" type="Label" parent="CornerButtons/BotBtn"]
+offset_left = -61.0
+offset_top = -46.0
+offset_right = 59.0
+theme_override_colors/font_color = Color(0.00392157, 0.262745, 0, 1)
+theme_override_fonts/font = ExtResource( "11_4xvet" )
+theme_override_font_sizes/font_size = 14
+text = "Add bots?
+Off"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="input_event" from="CornerButtons/QuitBtn" to="CornerButtons/QuitBtn" method="_on_quit_btn_input_event"]
+[connection signal="input_event" from="CornerButtons/BotBtn" to="CornerButtons/BotBtn" method="_on_quit_btn_input_event"]

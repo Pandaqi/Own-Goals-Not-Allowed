@@ -1,0 +1,16 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOGGVorbis"
+uid="uid://bkc4f5u0qrw82"
+path="res://.godot/imported/field_change.ogg-850cad24f5410a4ed1870add8a1eafee.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/field_change.ogg"
+dest_files=["res://.godot/imported/field_change.ogg-850cad24f5410a4ed1870add8a1eafee.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0

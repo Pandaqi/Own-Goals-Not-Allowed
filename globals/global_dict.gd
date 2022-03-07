@@ -8,6 +8,7 @@ var cfg = {
 	'predefined_window_size': Vector2(1280, 720),
 	
 	'num_points_to_win': 100,
+	'bots': true, # DEBUGGING
 	'colors': {
 		'teams': [
 			Color(0,0,1),

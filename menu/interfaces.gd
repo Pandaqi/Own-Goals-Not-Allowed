@@ -23,6 +23,7 @@ func _input(ev):
 	var res = GInput.check_new_player(ev)
 	if res.failed: return
 	
+	GAudio.play_static_sound("ui_button")
 	interfaces[res.num].activate()
 
 func on_player_ready():
@@ -44,6 +45,8 @@ func on_player_removed(removed_interface):
 	# All interfaces BEFORE this one can stay the same
 	# All after them need to be recalculated
 	# (toggled on/off, or turned off definitely)
+	
+	GAudio.play_static_sound("ui_button")
 	
 	var my_index = interfaces.find(removed_interface)
 	for i in range(my_index, interfaces.size()):

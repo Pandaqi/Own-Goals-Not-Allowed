@@ -1,0 +1,16 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dos52m78xvnhn"
+path="res://.godot/imported/thud15.mp3-f45ad5599650465e8806b9096d17699f.mp3str"
+
+[deps]
+
+source_file="res://audio/thud15.mp3"
+dest_files=["res://.godot/imported/thud15.mp3-f45ad5599650465e8806b9096d17699f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0

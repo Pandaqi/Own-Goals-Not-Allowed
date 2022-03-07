@@ -18,23 +18,45 @@ var bg_audio_embel = [
 	preload("res://audio/embel_3.mp3")
 ]
 
+var bg_custom_volume : float = -6
 var bg_audio_player
 var bg_audio_player_2
 
 # NOTE: "players" refers to "audio_players" here, not in-game players ...
 var active_players = []
 
-var audio_preload = {}
-#var audio_preload = {
-#	"ball_hit": [],
-#	"goal": preload(),
-#	"own_goal": preload(),
-#	"field_change": preload(),
-#	"powerup_grab": preload(),
-#	"gameover": preload(),
-#	"ui_button": preload(),
-#	"teleport": preload()
-#}
+var audio_preload = {
+	"ball_hit": [
+		preload("res://audio/thud1.ogg"),
+		preload("res://audio/thud2.mp3"),
+		preload("res://audio/thud3.mp3"),
+		preload("res://audio/thud4.mp3"),
+		preload("res://audio/thud5.mp3"),
+		preload("res://audio/thud6.mp3"),
+		preload("res://audio/thud7.mp3"),
+		preload("res://audio/thud8.mp3"),
+		preload("res://audio/thud9.mp3"),
+		preload("res://audio/thud10.mp3"),
+		preload("res://audio/thud11.mp3"),
+		preload("res://audio/thud12.mp3"),
+		preload("res://audio/thud13.mp3"),
+		preload("res://audio/thud14.mp3"),
+		preload("res://audio/thud15.mp3"),
+		preload("res://audio/bounce1.ogg"),
+		preload("res://audio/bounce3.ogg"),
+	],
+	"goal": preload("res://audio/goal.ogg"),
+	"own_goal": preload("res://audio/own_goal.ogg"),
+	"field_change": preload("res://audio/field_change.ogg"),
+	"powerup_grab": [
+		preload("res://audio/powerup_grab_1.ogg"),
+		preload("res://audio/powerup_grab_2.ogg"),
+		preload("res://audio/powerup_grab_3.ogg")
+	],
+	"gameover": preload("res://audio/gameover.ogg"),
+	"ui_button": preload("res://audio/ui_button.ogg"),
+	"teleport": preload("res://audio/teleport.ogg")
+}
 
 func _ready():
 	create_background_stream()
@@ -43,6 +65,7 @@ func create_background_stream():
 	bg_audio_player = AudioStreamPlayer.new()
 	bg_audio_player.bus = "BG"
 	bg_audio_player.process_mode = PROCESS_MODE_ALWAYS
+	bg_audio_player.volume_db = bg_custom_volume
 	add_child(bg_audio_player)
 
 	bg_audio_player.stream = bg_audio_core[randi() % bg_audio_core.size()]
@@ -52,6 +75,7 @@ func create_background_stream():
 	bg_audio_player_2 = AudioStreamPlayer.new()
 	bg_audio_player.bus = "BG"
 	bg_audio_player.process_mode = PROCESS_MODE_ALWAYS
+	bg_audio_player_2.volume_db = bg_custom_volume
 	add_child(bg_audio_player_2)
 
 	bg_audio_player_2.stream = bg_audio_embel[randi() % bg_audio_embel.size()]
@@ -92,9 +116,8 @@ func create_audio_player(volume_alteration, bus : String = "FX", spatial : bool 
 	active_players.append(audio_player)
 	
 	if destroy_when_done:
-		audio_player.connect("finished", self, "audio_player_done", [audio_player])
-	#audio_player.pause_mode = Node.PAUSE_MODE_PROCESS
-	
+		audio_player.finished.connect(self.audio_player_done.bind(audio_player))
+
 	return audio_player
 
 func audio_player_done(which_one):

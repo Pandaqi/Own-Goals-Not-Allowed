@@ -45,6 +45,10 @@ func check_for_goals():
 		if local_position.y > 0.5*size.y: scored_in_goal(field.bottom_team, b, false)
 		elif local_position.y < -0.5*size.y: scored_in_goal(field.top_team, b, true)
 
+func get_first():
+	if balls.size() <= 0: return null
+	return balls[0]
+
 func is_own_goal(team_num, ball) -> bool:
 	return ball.get_last_touching_team_num() == team_num
 

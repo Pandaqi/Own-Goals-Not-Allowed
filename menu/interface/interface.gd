@@ -77,3 +77,4 @@ func _on_ready_area_completed():
 func make_ready():
 	is_ready = true
 	interface_manager.on_player_ready()
+	GAudio.play_static_sound("ui_button")
