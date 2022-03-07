@@ -14,6 +14,10 @@ func activate():
 
 func set_random_type():
 	type = GDict.powerup_types.keys()[randi() % GDict.powerup_types.size()]
+	
+	# DEBUGGING
+	type = 'shrink_player'
+	
 	sprite.set_frame(GDict.powerup_types[type].frame)
 
 func point_to_random_side():
@@ -38,8 +42,12 @@ func is_grabbed_by(node):
 	if is_player_focused:
 		powerup_manager.main_node.players.execute_powerup_for_all(node.player_num, self)
 	
+	GAudio.play_dynamic_sound(self, "powerup_grab")
+	
 	remove()
 
 func remove():
 	powerup_manager.remove_powerup(self)
-	self.queue_free()
+	
+	var tw = GTween.tween_bounce_reverse(self)
+	tw.tween_callback(queue_free)

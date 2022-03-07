@@ -33,7 +33,12 @@ func get_for(team_num : int):
 
 func give_points_to(team_num : int, dp : int):
 	score[team_num] += dp
-	score_labels[team_num].set_value(score[team_num])
+	
+	if field.top_team == team_num:
+		score_labels[0].set_value(score[team_num])
+	elif field.bottom_team == team_num:
+		score_labels[1].set_value(score[team_num])
+		
 	field.field_manager.update_global_scores()
 
 func is_own_goal(team_num, ball) -> bool:

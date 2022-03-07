@@ -66,9 +66,7 @@ func is_right_field():
 
 func resize():
 	extents.y = field_manager.get_max_height()
-	drawer.update()
-	edges.update_from_field()
-	score.update_from_field()
+	update_all_visuals()
 
 func get_random_position_inside() -> Vector2:
 	var bad_pos : bool = true
@@ -87,4 +85,11 @@ func get_random_position_inside() -> Vector2:
 	return pos
 
 func reverse_goal_dir():
-	pass # TO DO
+	top_team = (top_team + 1) % 2
+	bottom_team = (bottom_team + 1) % 2
+	update_all_visuals()
+
+func update_all_visuals():
+	drawer.update()
+	edges.update_from_field()
+	score.update_from_field()

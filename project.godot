@@ -12,7 +12,9 @@ config_version=5
 
 config/name="Own Goals Not Allowed"
 run/main_scene="res://gameloop/main.tscn"
-config/icon="res://icon.png"
+config/icon="res://metadata/favicon.png"
+config/macos_native_icon="res://metadata/favicon.icns"
+config/windows_native_icon="res://metadata/favicon.ico"
 config/features=PackedStringArray("4.0", "Vulkan Clustered")
 
 [autoload]
@@ -20,6 +22,7 @@ config/features=PackedStringArray("4.0", "Vulkan Clustered")
 GInput="*res://globals/global_input.gd"
 GDict="*res://globals/global_dict.gd"
 GTween="*res://globals/global_tween.gd"
+GAudio="*res://globals/global_audio.gd"
 
 [display]
 

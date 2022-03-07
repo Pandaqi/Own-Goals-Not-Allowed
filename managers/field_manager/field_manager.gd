@@ -54,6 +54,7 @@ func add_field():
 	
 	sort_fields_horizontally()
 	play_bouncy_tween(f)
+	GAudio.play_dynamic_sound(f, "field_change")
 	
 	rearrange_fields()
 
@@ -68,6 +69,7 @@ func remove_field(node):
 	node.gates.on_removal()
 	node.busy_removing = true
 	
+	GAudio.play_dynamic_sound(node, "field_change")
 	play_bouncy_tween(node, false)
 	
 	sort_fields_horizontally()
@@ -162,6 +164,9 @@ func get_aggregate_score_for(team_num : int) -> int:
 	for f in fields:
 		sum += f.score.get_for(team_num)
 	return sum
+
+func count() -> int:
+	return fields.size()
 
 func get_all_fields() -> Array:
 	return fields + []

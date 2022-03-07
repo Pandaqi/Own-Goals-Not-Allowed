@@ -1,0 +1,16 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://hpvcnla1kpmq"
+path="res://.godot/imported/embel_2.mp3-97be81aacd0e96133619e7d723667bbc.mp3str"
+
+[deps]
+
+source_file="res://audio/embel_2.mp3"
+dest_files=["res://.godot/imported/embel_2.mp3-97be81aacd0e96133619e7d723667bbc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0

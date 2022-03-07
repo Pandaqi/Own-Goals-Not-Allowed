@@ -2,12 +2,14 @@ extends RigidDynamicBody2D
 
 const VEL_BOUNDS : Dictionary = { 'min': 30.0, 'max': 500.0 }
 var last_touch = null
+var last_touch_num : int = -1
 var teleport_pos = null
 var can_score : bool = true
 var field
 
 @onready var no_goal_timer : Timer = $NoGoalTimer
-@onready var drawer = $Drawer
+@onready var drawer : Node2D = $Drawer
+@onready var sprite : Sprite2D = $Drawer/Sprite2D
 
 var type : String = "regular"
 
@@ -16,8 +18,19 @@ func _ready():
 
 func set_type(tp : String):
 	type = tp
+	sprite.set_frame(GDict.ball_types[type].frame)
 	
-	# TO DO: update some visuals based on that type
+	if type == 'extra_bouncy':
+		physics_material_override = physics_material_override.duplicate(true)
+		physics_material_override.bounce = 2.5
+	
+	elif type == 'small':
+		$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate(true)
+		$CollisionShape2D.shape.radius *= 0.5
+		sprite.scale *= 0.5
+		drawer.outline_thickness *= 0.5
+	
+	drawer.update()
 
 func plan_teleport(pos : Vector2):
 	teleport_pos = pos
@@ -40,6 +53,7 @@ func _integrate_forces(state):
 
 func cap_velocity(state):
 	var factor = field.powerups.get_slowdown_factor()
+	if type == 'extra_bouncy': factor *= 2.0
 	
 	var speed = state.linear_velocity.length()
 	var dir = state.linear_velocity.normalized()
@@ -48,8 +62,11 @@ func cap_velocity(state):
 	state.linear_velocity = new_speed
 
 func _on_ball_body_entered(body):
+	GAudio.play_dynamic_sound(self, "ball_hit")
+	
 	if not body.is_in_group("Players"): return
 	last_touch = body
+	last_touch_num = body.team_num
 	
 	drawer.change_color(GDict.cfg.colors.teams[last_touch.team_num])
 
@@ -62,9 +79,8 @@ func get_last_touching_player():
 	return last_touch
 
 # NOTE: this is often the only thing we need
-func get_last_touching_team_num():
-	if last_touch == null: return -1
-	return last_touch.team_num
+func get_last_touching_team_num() -> int:
+	return last_touch_num
 
 func on_goal_scored():
 	GTween.tween_bounce(self)

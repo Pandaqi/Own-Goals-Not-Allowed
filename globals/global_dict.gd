@@ -7,13 +7,13 @@ var cfg = {
 	'rescale_viewport': false,
 	'predefined_window_size': Vector2(1280, 720),
 	
-	'num_points_to_win': 100, # DEBUGGING
+	'num_points_to_win': 100,
 	'colors': {
 		'teams': [
 			Color(0,0,1),
 			Color(1,0,1)
 		],
-		'ball': Color(1,0,0)
+		'ball': Color(0,0,0)
 	}
 }
 
@@ -41,13 +41,21 @@ var powerup_types = {
 	
 	"move_faster": { 'focus': 'player', 'frame': 9 },
 	"move_slower": { 'focus': 'player', 'frame': 10 },
-	"reverse": { 'focus': 'player', 'frame': 11 }
+	"reverse_controls": { 'focus': 'player', 'frame': 11 },
+	
+	"ball_extra_bouncy": { 'focus': 'field', 'frame': 12 },
+	"ball_small": { 'focus': 'field', 'frame': 13 },
+	"shrink_all": { 'focus': 'field', 'frame': 14 },
+	
+	"shrink_player": { 'focus': 'player', 'frame': 15 },
 }
 
 var ball_types = {
 	'regular': { 'frame': 0 },
 	'five': { 'frame': 1 },
-	'double': { 'frame': 2 }
+	'double': { 'frame': 2 },
+	'extra_bouncy': { 'frame': 3 },
+	'small': { 'frame': 4 }
 }
 
 const PREDEFINED_SHAPE_SCALE : float = 1.0
@@ -60,6 +68,18 @@ var available_faces : Array = []
 func _ready():
 	load_faces()
 	load_predefined_shapes()
+	determine_team_colors()
+
+func determine_team_colors():
+	var hue = randf()
+	var saturation = 0.75
+	var luminance = 0.75
+	
+	var col_0 = Color.from_hsv(hue, saturation, luminance)
+	var col_1 = Color.from_hsv(hue+0.5, saturation, luminance)
+	
+	cfg.colors.teams[0] = col_0
+	cfg.colors.teams[1] = col_1
 
 func load_faces():
 	for i in range(NUM_FACES):
@@ -80,8 +100,8 @@ func load_predefined_shapes():
 	available_shapes.shuffle()
 
 # NOTE: Points are already around centroid, and shaper node will do that again anyway, so just scale only
-func scale_shape(points):
+func scale_shape(points, val : float = PREDEFINED_SHAPE_SCALE):
 	var new_points = []
 	for p in points:
-		new_points.append(p * PREDEFINED_SHAPE_SCALE)
+		new_points.append(p * val)
 	return new_points

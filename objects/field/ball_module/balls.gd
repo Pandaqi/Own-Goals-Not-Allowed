@@ -58,6 +58,11 @@ func scored_in_goal(team_num : int, ball, top_goal : bool):
 	ball.on_goal_scored()
 	field.main_node.field_manager.scored_in_goal(team_num, ball, own_goal)
 	
+	if own_goal:
+		GAudio.play_dynamic_sound(ball, "own_goal")
+	else:
+		GAudio.play_dynamic_sound(ball, "goal")
+	
 	destroy_ball(ball)
 	
 	if balls.size() <= 0: create_ball()

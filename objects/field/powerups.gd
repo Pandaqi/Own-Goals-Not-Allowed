@@ -28,13 +28,22 @@ func grab(powerup, grabber):
 		field.balls.change_type_to('double')
 	
 	elif type == 'full_slowdown':
-		slowdown_factor = 0.2
+		slowdown_factor = 0.32
 	
 	elif type == 'shrink_goals':
-		field.edges.call_deferred("shrink_goals")
+		field.edges.call_deferred("change_goal_sizes", -70)
 	
 	elif type == 'grow_goals':
-		field.edges.call_deferred("grow_goals")
+		field.edges.call_deferred("change_goal_sizes", 70)
 	
 	elif type == 'reverse_goal_dir':
 		field.call_deferred("reverse_goal_dir")
+	
+	elif type == "ball_extra_bouncy":
+		field.balls.change_type_to('extra_bouncy')
+	
+	elif type == "ball_small":
+		field.balls.change_type_to('small')
+	
+	elif type == 'shrink_all':
+		field.players.call_deferred('shrink_all', 0.5)

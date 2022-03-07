@@ -13,6 +13,7 @@ func _ready():
 
 func set_team(t_num):
 	team = t_num
+	drawer.update()
 
 func set_size(size : Vector2):
 	col_shape.size = size

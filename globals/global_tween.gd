@@ -25,6 +25,16 @@ func tween_bounce(node):
 	
 	return tw
 
+func tween_bounce_reverse(node):
+	node.set_scale(Vector2.ONE)
+	
+	var tw = get_tree().create_tween()
+	tw.tween_property(node, "scale", Vector2(1.2, 0.8), 0.1)
+	tw.tween_property(node, "scale", Vector2(0.5, 1.5), 0.1)
+	tw.tween_property(node, "scale", Vector2.ZERO, 0.2)
+	
+	return tw
+
 func tween_goal_effect(node):
 	var tw = tween_bounce(node)
 	

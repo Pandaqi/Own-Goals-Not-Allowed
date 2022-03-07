@@ -57,15 +57,18 @@ func _draw():
 	
 	#
 	# keeper area
+	# TO DO: generalize this, so it's just a loop?
 	#
-	var goal_size = body.edges.goal_width
+	var goal_size_0 = body.edges.goal_widths[0]
+	var goal_size_1 = body.edges.goal_widths[1]
 	var keeper_margin = 50
 	var mid_top = Vector2(0, -0.5*size.y)
-	var area_size = Vector2(goal_size + keeper_margin, 0.5*goal_size)
-	var rect_0 = Rect2(mid_top - Vector2(0.5*area_size.x, 0), area_size)
+	var area_size_0 = Vector2(goal_size_0 + keeper_margin, 0.5*goal_size_0)
+	var rect_0 = Rect2(mid_top - Vector2(0.5*area_size_0.x, 0), area_size_0)
 	
 	var mid_bottom = Vector2(0, 0.5*size.y)
-	var rect_1 = Rect2(mid_bottom - Vector2(0.5*area_size.x, area_size.y), area_size)
+	var area_size_1 = Vector2(goal_size_1 + keeper_margin, 0.5 * goal_size_1)
+	var rect_1 = Rect2(mid_bottom - Vector2(0.5*area_size_1.x, area_size_1.y), area_size_1)
 	
 	draw_rect(rect_0, MARKINGS_COLOR, false, MARKINGS_SIZE)
 	draw_rect(rect_1, MARKINGS_COLOR, false, MARKINGS_SIZE)

@@ -12,7 +12,17 @@ func activate():
 func create_initial_players():
 	for i in range(GInput.get_player_count()):
 		players_by_num[str(i)] = []
-		add_player(i)
+	
+	var first_field = field.main_node.field_manager.count() == 1
+	if first_field:
+		for i in range(GInput.get_player_count()):
+			add_player(i)
+	
+	else:
+		var p0 = field.main_node.players.get_least_occuring_player_of_team(0)
+		var p1 = field.main_node.players.get_least_occuring_player_of_team(1)
+		add_player(p0)
+		add_player(p1)
 
 func add_player(p_num : int, desired_pos = null):
 	var p = player_scene.instantiate()
@@ -23,6 +33,7 @@ func add_player(p_num : int, desired_pos = null):
 		p.set_position(desired_pos)
 	
 	p.field = field
+	p.busy_adding = true
 	add_child(p)
 	
 	p.set_data(p_num, GDict.player_data[p_num].team)
@@ -37,10 +48,13 @@ func remove_player(p_num : int):
 	remove_player_by_node(node_to_remove)
 
 func remove_player_by_node(node):
+	node.busy_removing = true
+	
 	var p_num = node.player_num
 	players_by_num[str(p_num)].erase(node)
 	players.erase(node)
 	play_remove_tween(node)
+	
 
 func play_add_tween(node):
 	node.set_scale(Vector2.ZERO)
@@ -49,6 +63,7 @@ func play_add_tween(node):
 	tw.tween_property(node, "scale", Vector2(1.2, 0.8), 0.2)
 	tw.tween_property(node, "scale", Vector2(0.9, 1.1), 0.2)
 	tw.tween_property(node, "scale", Vector2.ONE, 0.1)
+	tw.tween_callback(node.initialization_finished)
 
 func play_remove_tween(node):
 	var tw = get_tree().create_tween()
@@ -105,3 +120,7 @@ func remove_all(data : Dictionary):
 			if p.team_num != data.team: continue
 		
 		remove_player_by_node(players[i])
+
+func shrink_all(val : float):
+	for p in players:
+		p.shaper.shrink(val)

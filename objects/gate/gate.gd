@@ -23,6 +23,8 @@ func _on_area_2d_body_entered(body):
 		remove_powerup()
 		twin.remove_powerup()
 	
+	GAudio.play_dynamic_sound(body, "teleport")
+	
 	field.players.remove_player_by_node(body)
 	twin.field.players.call_deferred("add_player", body.player_num, twin.get_appear_pos())
 

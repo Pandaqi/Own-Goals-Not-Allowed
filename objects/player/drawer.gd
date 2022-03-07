@@ -5,7 +5,7 @@ var color : Color = Color(1.0, 0.0, 0.0)
 
 var points : Array
 var outline : Array
-var outline_thickness = 0
+var outline_thickness = 2
 
 func calculate_shape_list():
 	var shape_list = []

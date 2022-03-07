@@ -4,7 +4,7 @@ extends Node2D
 @onready var particles = $GPUParticles2D
 var color : Color
 
-var outline_thickness : float = 5.0
+var outline_thickness : float = 8.0
 
 func _ready():
 	reset_color()
@@ -19,7 +19,7 @@ func change_color(col : Color):
 
 func _draw():
 	var radius = body.get_node("CollisionShape2D").shape.radius
-	draw_circle(Vector2.ZERO, radius, color)
+	#draw_circle(Vector2.ZERO, radius, color)
 	
 	if outline_thickness > 0:
 		draw_arc(Vector2.ZERO, radius, 0, 2*PI, 20, color.darkened(0.5), outline_thickness, true)

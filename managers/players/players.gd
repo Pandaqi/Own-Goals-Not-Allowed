@@ -14,6 +14,8 @@ func cache_team_members():
 	for i in range(GInput.get_player_count()):
 		var data = GDict.player_data[i]
 		teams[data.team].append(i)
+	
+	print(teams)
 
 func _physics_process(dt):
 	poll_input()
@@ -53,6 +55,7 @@ func handle_players_without_character():
 
 func execute_powerup_for_all(p_num : int, node):
 	var list : Array = get_all_players_with_num(p_num)
+	
 	for p in list:
 		p.powerups.grab(node)
 
@@ -63,3 +66,19 @@ func get_all_players_with_num(p_num : int) -> Array:
 		if p.player_num != p_num: continue
 		list.append(p)
 	return list
+
+func get_least_occuring_player_of_team(team_num : int) -> int:
+	var lowest_sum : int = 200
+	var lowest_player = -1
+	
+	print("CHECKERONI")
+	print(teams[team_num])
+	
+	for p_num in teams[team_num]:
+		var sum = count_instances_of(p_num)
+		if sum >= lowest_sum: continue
+		
+		lowest_sum = sum
+		lowest_player = p_num
+
+	return lowest_player

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://4iv5rm700p88"]
+
+[ext_resource type="Script" path="res://objects/field/edges/single_slope.gd" id="1_tbsf2"]
+[ext_resource type="Script" path="res://objects/field/edges/slope_drawer.gd" id="2_eay2m"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_k8mo2"]
+friction = 0.25
+bounce = 1.0
+
+[node name="Slope" type="StaticBody2D"]
+physics_material_override = SubResource( "PhysicsMaterial_k8mo2" )
+script = ExtResource( "1_tbsf2" )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-20, 0, 0, 0, 0, 20)
+
+[node name="Drawer" type="Node2D" parent="."]
+script = ExtResource( "2_eay2m" )

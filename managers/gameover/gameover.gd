@@ -29,6 +29,8 @@ func game_over(winning_team : int):
 	
 	main_node.field_manager.remove_all_fields()
 	
+	GAudio.play_static_sound("gameover")
+	
 	# create two confettis, one rotated upside down, to get a full circle of confetti!
 	for i in range(2):
 		var c = confetti_particles.instantiate()

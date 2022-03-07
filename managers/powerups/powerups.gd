@@ -4,7 +4,7 @@ extends Node2D
 @onready var timer : Timer = $Timer
 var powerups : Array = []
 
-const TIMER_BOUNDS : Dictionary = { 'min': 1.0, 'max': 5.0 }
+const TIMER_BOUNDS : Dictionary = { 'min': 7.0, 'max': 17.0 }
 const POWERUP_BOUNDS : Dictionary = { 'min': 0, 'max': 2 }
 
 var powerup_scene : PackedScene = preload("res://objects/powerups/powerup.tscn")
@@ -21,15 +21,10 @@ func _on_timer_timeout():
 	place_new_powerup()
 
 func place_new_powerup():
-	print("TRYING TO PLACE POWERUP")
-	
 	if powerups.size() >= POWERUP_BOUNDS.max: return
 	
 	var gates : Array = collect_gates_without_powerup()
-	
-	print("CANDIDATES")
-	print(gates)
-	
+
 	if gates.size() <= 0: return
 	
 	var p = powerup_scene.instantiate()
