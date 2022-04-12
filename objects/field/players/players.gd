@@ -127,4 +127,4 @@ func remove_all(data : Dictionary):
 
 func shrink_all(val : float):
 	for p in players:
-		p.shaper.shrink(val)
+		p.shaper.change_size(val)

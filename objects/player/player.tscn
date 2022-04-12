@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://objects/player/shaper.gd" id="3_r27qp"]
 [ext_resource type="PackedScene" uid="uid://bp11hydve7v03" path="res://objects/player/trail_particles.tscn" id="4_mg7vg"]
 [ext_resource type="Script" path="res://objects/player/powerups.gd" id="5_lkxr3"]
-[ext_resource type="Texture2D" uid="uid://b6ll11psw10gb" path="res://objects/player/player_faces.png" id="5_q8k2l"]
+[ext_resource type="Texture2D" uid="uid://b6ll11psw10gb" path="res://objects/player/player_faces.png" id="6_pueqp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gmy82"]
 bounce = 1.0
@@ -22,9 +22,6 @@ script = ExtResource( "1_sl0sd" )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
-[node name="Shaper" type="Node2D" parent="."]
-script = ExtResource( "3_r27qp" )
-
 [node name="Drawer" type="Node2D" parent="."]
 script = ExtResource( "3_3r6xp" )
 
@@ -32,16 +29,20 @@ script = ExtResource( "3_3r6xp" )
 scale_amount_min = 0.3
 scale_amount_max = 0.4
 
+[node name="Shaper" type="Node2D" parent="."]
+script = ExtResource( "3_r27qp" )
+
+[node name="FaceSprite" type="Sprite2D" parent="Shaper"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource( "6_pueqp" )
+hframes = 8
+
 [node name="Powerups" type="Node2D" parent="."]
 script = ExtResource( "5_lkxr3" )
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource( "5_q8k2l" )
-hframes = 8
 
 [node name="StartFreezeTimer" type="Timer" parent="."]
 wait_time = 0.65
 one_shot = true
 
+[connection signal="body_entered" from="." to="." method="_on_player_body_entered"]
 [connection signal="timeout" from="StartFreezeTimer" to="." method="_on_start_freeze_timer_timeout"]

@@ -1,9 +1,9 @@
 [remap]
 
 importer="texture"
-type="StreamTexture2D"
+type="CompressedTexture2D"
 uid="uid://f72ux8mjqwuu"
-path="res://.godot/imported/particle_confetti_2.png-16cb899de1f63410b94780a7b82c3849.stex"
+path="res://.godot/imported/particle_confetti_2.png-16cb899de1f63410b94780a7b82c3849.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://objects/field/goaleffects/particle_confetti_2.png"
-dest_files=["res://.godot/imported/particle_confetti_2.png-16cb899de1f63410b94780a7b82c3849.stex"]
+dest_files=["res://.godot/imported/particle_confetti_2.png-16cb899de1f63410b94780a7b82c3849.ctex"]
 
 [params]
 
@@ -21,7 +21,6 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-compress/streamed=false
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0

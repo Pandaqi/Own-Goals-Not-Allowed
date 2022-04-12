@@ -30,25 +30,25 @@ var player_data = [
 ]
 
 var powerup_types = {
-	"remove_all": { 'focus': 'field', 'frame': 0 },
-	"remove_opponents": { 'focus': 'field', 'frame': 1 },
-	"add_ball": { 'focus': 'field', 'frame': 2 },
-	"ball_five": { 'focus': 'field', 'frame': 3 },
-	"ball_double": { 'focus': 'field', 'frame': 4 },
-	"full_slowdown": { 'focus': 'field', 'frame': 5 },
-	"shrink_goals": { 'focus': 'field', 'frame': 6 },
-	"grow_goals": { 'focus': 'field', 'frame': 7 },
-	"reverse_goal_dir": { 'focus': 'field', 'frame': 8 },
+	"remove_all": { 'focus': 'field', 'frame': 0, "prob": 0.5, "txt": "Destroy All" },
+	"remove_opponents": { 'focus': 'field', 'frame': 1.0, "txt": "Destroy Others" },
+	"add_ball": { 'focus': 'field', 'frame': 2, "prob": 2.0, "txt": "Extra Ball" },
+	"ball_five": { 'focus': 'field', 'frame': 3, "prob": 2.0, "txt": "Five Ball" },
+	"ball_double": { 'focus': 'field', 'frame': 4, "prob": 2.0, "txt": "x2 Ball" },
+	"full_slowdown": { 'focus': 'field', 'frame': 5, "prob": 0.5, "txt": "Slowdown" },
+	"shrink_goals": { 'focus': 'field', 'frame': 6, "prob": 0.5, "txt": "Smaller Goals" },
+	"grow_goals": { 'focus': 'field', 'frame': 7, "prob": 2.0, "txt": "Bigger Goals" },
+	"reverse_goal_dir": { 'focus': 'field', 'frame': 8, "prob": 2.0, "txt": "Switch Sides" },
 	
-	"move_faster": { 'focus': 'player', 'frame': 9 },
-	"move_slower": { 'focus': 'player', 'frame': 10 },
-	"reverse_controls": { 'focus': 'player', 'frame': 11 },
+	"move_faster": { 'focus': 'player', 'frame': 9, "prob": 1.0, "txt": "Faster" },
+	"move_slower": { 'focus': 'player', 'frame': 10, "prob": 0.5, "txt": "Slower" },
+	"reverse_controls": { 'focus': 'player', 'frame': 11, "prob": 0.5, "txt": "Reverse" },
 	
-	"ball_extra_bouncy": { 'focus': 'field', 'frame': 12 },
-	"ball_small": { 'focus': 'field', 'frame': 13 },
-	"shrink_all": { 'focus': 'field', 'frame': 14 },
+	"ball_extra_bouncy": { 'focus': 'field', 'frame': 12, "prob": 0.5, "txt": "Bouncy Ball" },
+	"ball_small": { 'focus': 'field', 'frame': 13, "prob": 2.0, "txt": "Small Ball" },
+	"shrink_all": { 'focus': 'field', 'frame': 14, "prob": 1.5, "txt": "Shrink All" },
 	
-	"shrink_player": { 'focus': 'player', 'frame': 15 },
+	"shrink_player": { 'focus': 'player', 'frame': 15, "prob": 1.0, "txt": "Shrink" },
 }
 
 var ball_types = {
@@ -59,7 +59,7 @@ var ball_types = {
 	'small': { 'frame': 4 }
 }
 
-const PREDEFINED_SHAPE_SCALE : float = 1.0
+const PREDEFINED_SHAPE_SCALE : float = 0.5
 var available_shapes : Array = []
 var predefined_shape_list : PackedScene = preload("res://objects/shapes/predefined_shape_list.tscn")
 

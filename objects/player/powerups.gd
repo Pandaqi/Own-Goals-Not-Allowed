@@ -15,4 +15,4 @@ func grab(node):
 	elif type == 'reverse_controls':
 		body.flip_reverse()
 	elif type == 'shrink_player':
-		body.shaper.shrink(0.5)
+		body.shaper.call_deferred("shrink", 0.5)

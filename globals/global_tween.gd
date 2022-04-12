@@ -1,5 +1,16 @@
 extends Node
 
+var feedback_scene = preload("res://objects/powerups/feedback_text.tscn")
+
+func create_feedback_for_node(node, txt : String):
+	create_feedback_at(node.get_global_transform_with_canvas().origin, txt)
+
+func create_feedback_at(pos : Vector2, txt : String):
+	var f = feedback_scene.instantiate()
+	f.get_node("LabelContainer/Label").set_text(txt)
+	get_node("/root/Main/Score").add_child(f)
+	f.set_position(pos)
+
 func tween_label(node):
 	var tw = get_tree().create_tween()
 	tw.tween_property(node, "scale", Vector2(1.2, 0.8), 0.15)

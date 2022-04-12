@@ -9,16 +9,11 @@ var pointing_left : bool = false
 @onready var sprite : Sprite2D = $Sprite2D
 
 func activate():
-	set_random_type()
 	point_to_random_side()
 
-func set_random_type():
-	type = GDict.powerup_types.keys()[randi() % GDict.powerup_types.size()]
-	
-	# DEBUGGING
-	type = 'shrink_player'
-	
-	sprite.set_frame(GDict.powerup_types[type].frame)
+func set_type(tp : String):
+	type = tp
+	sprite.set_frame(GDict.powerup_types[tp].frame)
 
 func point_to_random_side():
 	pointing_left = false if randf() <= 0.5 else true
@@ -43,6 +38,7 @@ func is_grabbed_by(node):
 		powerup_manager.main_node.players.execute_powerup_for_all(node.player_num, self)
 	
 	GAudio.play_dynamic_sound(self, "powerup_grab")
+	GTween.create_feedback_for_node(self, GDict.powerup_types[type].txt)
 	
 	remove()
 

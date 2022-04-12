@@ -1,9 +1,9 @@
 [remap]
 
 importer="texture"
-type="StreamTexture2D"
+type="CompressedTexture2D"
 uid="uid://dfoqgdydy5kcn"
-path="res://.godot/imported/player_interface_bg.png-74619e0eece88a9bf6f19e18a58034fa.stex"
+path="res://.godot/imported/player_interface_bg.png-74619e0eece88a9bf6f19e18a58034fa.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://menu/player_interface_bg.png"
-dest_files=["res://.godot/imported/player_interface_bg.png-74619e0eece88a9bf6f19e18a58034fa.stex"]
+dest_files=["res://.godot/imported/player_interface_bg.png-74619e0eece88a9bf6f19e18a58034fa.ctex"]
 
 [params]
 
@@ -21,7 +21,6 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-compress/streamed=false
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0

@@ -1,10 +1,10 @@
 [remap]
 
 importer="texture"
-type="StreamTexture2D"
+type="CompressedTexture2D"
 uid="uid://ckljk1uaikyvu"
-path.s3tc="res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.s3tc.stex"
-path.etc2="res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.etc2.stex"
+path.s3tc="res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.s3tc.ctex"
+path.etc2="res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -13,7 +13,7 @@ metadata={
 [deps]
 
 source_file="res://objects/field/bg/grass_texture.png"
-dest_files=["res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.s3tc.stex", "res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.etc2.stex"]
+dest_files=["res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.s3tc.ctex", "res://.godot/imported/grass_texture.png-c45e0872d6e3c300c8cdd11a7a847709.etc2.ctex"]
 
 [params]
 
@@ -23,7 +23,6 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-compress/streamed=false
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0

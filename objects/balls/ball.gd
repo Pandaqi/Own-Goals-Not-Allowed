@@ -1,6 +1,6 @@
 extends RigidDynamicBody2D
 
-const VEL_BOUNDS : Dictionary = { 'min': 30.0, 'max': 500.0 }
+const VEL_BOUNDS : Dictionary = { 'min': 50.0, 'max': 700.0 }
 var last_touch = null
 var last_touch_num : int = -1
 var teleport_pos = null
@@ -13,7 +13,10 @@ var field
 
 var type : String = "regular"
 
+const LINEAR_DAMPING : float = 0.3
+
 func _ready():
+	linear_damp = LINEAR_DAMPING
 	GTween.tween_bounce(self)
 
 func set_type(tp : String):
@@ -83,7 +86,6 @@ func get_last_touching_team_num() -> int:
 	return last_touch_num
 
 func on_goal_scored():
-	GTween.tween_bounce(self)
 	reset_last_touch()
 	can_score = false
 	no_goal_timer.start()

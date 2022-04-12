@@ -1,9 +1,9 @@
 [remap]
 
 importer="texture"
-type="StreamTexture2D"
+type="CompressedTexture2D"
 uid="uid://n0nmd577m4jo"
-path="res://.godot/imported/FieldShadow.png-f28714ab5c6490addf3f638d147c55df.stex"
+path="res://.godot/imported/FieldShadow.png-f28714ab5c6490addf3f638d147c55df.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://objects/field/bg/FieldShadow.png"
-dest_files=["res://.godot/imported/FieldShadow.png-f28714ab5c6490addf3f638d147c55df.stex"]
+dest_files=["res://.godot/imported/FieldShadow.png-f28714ab5c6490addf3f638d147c55df.ctex"]
 
 [params]
 
@@ -21,7 +21,6 @@ compress/hdr_compression=1
 compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
-compress/streamed=false
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
