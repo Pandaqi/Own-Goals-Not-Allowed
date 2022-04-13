@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://co51t2v2ef2cq"
-path="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"
+uid="uid://b84u7olsckpp0"
+path="res://.godot/imported/panda_full_brown.png-4656e11ca8df958cdddf5bb1420dddad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.ctex"]
+source_file="res://pandaqi_boot/panda_full_brown.png"
+dest_files=["res://.godot/imported/panda_full_brown.png-4656e11ca8df958cdddf5bb1420dddad.ctex"]
 
 [params]
 

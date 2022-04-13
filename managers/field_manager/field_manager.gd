@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var main_node = get_parent()
 
-const NUM_STARTING_FIELDS : int = 1
+const NUM_STARTING_FIELDS : Dictionary = { 'min': 1, 'max': 2 }
 const PADDING : Vector2 = Vector2(40, 40)
 const PADDING_BETWEEN_FIELDS : float = 40.0
 
@@ -28,7 +28,8 @@ func on_resize(vp):
 	rearrange_fields()
 
 func create_starting_fields():
-	for i in range(NUM_STARTING_FIELDS):
+	var num_starting_fields : int = randi_range(NUM_STARTING_FIELDS.min, NUM_STARTING_FIELDS.max)
+	for i in range(num_starting_fields):
 		add_field()
 
 func add_field():

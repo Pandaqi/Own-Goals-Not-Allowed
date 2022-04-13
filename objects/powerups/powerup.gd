@@ -3,13 +3,21 @@ extends Node2D
 var powerup_manager
 var type : String = ""
 
+var active : bool = false
+
 var linked_fields : Array = []
 var pointing_left : bool = false
 
+@onready var main_node = get_node("/root/Main")
 @onready var sprite : Sprite2D = $Sprite2D
+
+var powerup_particles : PackedScene = preload("res://objects/powerups/powerup_particle.tscn")
 
 func activate():
 	point_to_random_side()
+
+func finish_creation():
+	active = true
 
 func set_type(tp : String):
 	type = tp
@@ -39,6 +47,10 @@ func is_grabbed_by(node):
 	
 	GAudio.play_dynamic_sound(self, "powerup_grab")
 	GTween.create_feedback_for_node(self, GDict.powerup_types[type].txt)
+	
+	var p = powerup_particles.instantiate()
+	main_node.add_child(p)
+	p.set_position(global_position) 
 	
 	remove()
 

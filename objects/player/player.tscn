@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsudw6ipib3ds"]
+[gd_scene load_steps=9 format=3 uid="uid://bsudw6ipib3ds"]
 
 [ext_resource type="Script" path="res://objects/player/player.gd" id="1_sl0sd"]
 [ext_resource type="Script" path="res://objects/player/drawer.gd" id="3_3r6xp"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gmy82"]
 bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5fcjo"]
+radius = 66.0303
 
 [node name="Player" type="RigidDynamicBody2D" groups=["Players"]]
 collision_layer = 3
@@ -39,6 +42,11 @@ hframes = 8
 
 [node name="Powerups" type="Node2D" parent="."]
 script = ExtResource( "5_lkxr3" )
+
+[node name="Area2D" type="Area2D" parent="Powerups"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Powerups/Area2D"]
+shape = SubResource( "CircleShape2D_5fcjo" )
 
 [node name="StartFreezeTimer" type="Timer" parent="."]
 wait_time = 0.65

@@ -25,7 +25,7 @@ func create_initial_players():
 		add_player(p0)
 		add_player(p1)
 
-func add_player(p_num : int, desired_pos = null):
+func add_player(p_num : int, desired_pos = null, powerup_data : Dictionary = {}):
 	var p = player_scene.instantiate()
 	
 	if (desired_pos == null):
@@ -38,11 +38,14 @@ func add_player(p_num : int, desired_pos = null):
 	add_child(p)
 	
 	p.set_data(p_num, GDict.player_data[p_num].team)
-	
+
 	players.append(p)
 	players_by_num[str(p_num)].append(p)
 	
 	play_add_tween(p)
+	
+	if powerup_data.has('type'):
+		p.powerups.grab(powerup_data)
 
 func remove_player(p_num : int):
 	var node_to_remove = players_by_num[str(p_num)][0]
@@ -125,6 +128,6 @@ func remove_all(data : Dictionary):
 		
 		remove_player_by_node(players[i])
 
-func shrink_all(val : float):
+func change_size_all(val : float):
 	for p in players:
 		p.shaper.change_size(val)

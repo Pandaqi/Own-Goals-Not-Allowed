@@ -60,7 +60,6 @@ func give_input_to_all_fields(bot_num : int, vec : Vector2):
 func determine_new_bot_state() -> String:
 	return bot_states[randi() % bot_states.size()]
 
-# TO DO: where all the bot magic happens
 func determine_input_for_bot(bot_num : int) -> Vector2:
 	
 	var data = bot_data[bot_num]

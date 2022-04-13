@@ -2,7 +2,7 @@ extends RigidDynamicBody2D
 
 @onready var main_node = get_node("/root/Main")
 
-const BOT_MOVE_SPEED : float = 100.0
+const BOT_MOVE_SPEED : float = 160.0
 const MOVE_SPEED : float = 200.0
 const AGILITY : float = 2.0
 var last_input : Vector2 = Vector2.ZERO
@@ -14,6 +14,7 @@ var team_num : int = -1
 var can_teleport : bool = false
 var field = null
 var body_hit : Vector2 = Vector2.ZERO
+var enable_extra_bounces : bool = true
 
 var speed_factor : float = 1.0
 var reverse : bool = false
@@ -104,6 +105,8 @@ func _on_start_freeze_timer_timeout():
 	can_teleport = true
 
 func _on_player_body_entered(body):
+	if not enable_extra_bounces: return
 	if not (body.is_in_group("Balls") or body.is_in_group("Players")): return
+	if body.is_in_group("Balls") and body.type == 'not_bouncy': return
 	
 	body_hit = body.global_transform.origin

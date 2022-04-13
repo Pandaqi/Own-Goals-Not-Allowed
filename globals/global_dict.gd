@@ -8,7 +8,7 @@ var cfg = {
 	'predefined_window_size': Vector2(1280, 720),
 	
 	'num_points_to_win': 100,
-	'bots': true, # DEBUGGING
+	'bots': false,
 	'colors': {
 		'teams': [
 			Color(0,0,1),
@@ -46,9 +46,18 @@ var powerup_types = {
 	
 	"ball_extra_bouncy": { 'focus': 'field', 'frame': 12, "prob": 0.5, "txt": "Bouncy Ball" },
 	"ball_small": { 'focus': 'field', 'frame': 13, "prob": 2.0, "txt": "Small Ball" },
-	"shrink_all": { 'focus': 'field', 'frame': 14, "prob": 1.5, "txt": "Shrink All" },
 	
+	"shrink_all": { 'focus': 'field', 'frame': 14, "prob": 1.5, "txt": "Shrink All" },
 	"shrink_player": { 'focus': 'player', 'frame': 15, "prob": 1.0, "txt": "Shrink" },
+	
+	"grow_all": { 'focus': 'field', 'frame': 16, 'prob': 0.75, 'txt': 'Grow All' },
+	'grow_player': { 'focus': 'player', 'frame': 17, 'prob': 1.5, 'txt': 'Grow' },
+	
+	'ball_not_bouncy': { 'focus': 'field', 'frame': 18, 'prob': 1.0, 'txt': 'Unbouncy Ball' },
+	'magnet': { 'focus': 'player', 'frame': 19, 'prob': 1.25, 'txt': 'Magnet' },
+	'player_unbounce': { 'focus': 'player', 'frame': 20, 'prob': 0.75, 'txt': "No Bounces" },
+	'add_obstacles': { 'focus': 'field', 'frame': 21, 'prob': 1.0, 'txt': "+ Obstacles" },
+	'remove_obstacles': { 'focus': 'field', 'frame': 22, 'prob': 2.0, 'txt': "- Obstacles" }
 }
 
 var ball_types = {
@@ -56,7 +65,8 @@ var ball_types = {
 	'five': { 'frame': 1 },
 	'double': { 'frame': 2 },
 	'extra_bouncy': { 'frame': 3 },
-	'small': { 'frame': 4 }
+	'small': { 'frame': 4 },
+	'not_bouncy': { 'frame': 5 }
 }
 
 const PREDEFINED_SHAPE_SCALE : float = 0.5

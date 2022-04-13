@@ -52,6 +52,9 @@ func place_new_powerup():
 	p.activate()
 	p.set_type(get_random_powerup_type())
 	
+	var tw = GTween.tween_bounce(p)
+	tw.tween_callback(p.finish_creation)
+	
 	var rand_gate = gates[randi() % gates.size()]
 	rand_gate.link_powerup(p)
 
@@ -66,7 +69,7 @@ func get_random_powerup_type() -> String:
 		running_sum += GDict.powerup_types[tp].prob
 		if running_sum >= target:
 			return tp
-	
+
 	return DEF_POWERUP_TYPE
 
 func collect_gates_without_powerup() -> Array:

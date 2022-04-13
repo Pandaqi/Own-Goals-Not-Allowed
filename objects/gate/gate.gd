@@ -18,15 +18,17 @@ func _on_area_2d_body_entered(body):
 	
 	if field.busy_removing or twin.field.busy_removing: return
 	
-	if not has_no_powerup():
+	var old_powerup_type = {}
+	if not has_no_powerup(true):
+		old_powerup_type.type = linked_powerup.type
 		linked_powerup.is_grabbed_by(body)
 		remove_powerup()
 		twin.remove_powerup()
 	
 	GAudio.play_dynamic_sound(body, "teleport")
-	
+
 	field.players.remove_player_by_node(body)
-	twin.field.players.call_deferred("add_player", body.player_num, twin.get_appear_pos())
+	twin.field.players.call_deferred("add_player", body.player_num, twin.get_appear_pos(), old_powerup_type)
 
 func update_position(y_pos : float):
 	self.position.y = y_pos
@@ -36,8 +38,11 @@ func update_position(y_pos : float):
 func get_appear_pos():
 	return self.position + appear_pos.position.rotated(self.rotation)
 
-func has_no_powerup() -> bool:
-	return linked_powerup == null or not is_instance_valid(linked_powerup)
+func has_no_powerup(dont_count_inactive : bool = false) -> bool:
+	if linked_powerup == null: return true
+	if not is_instance_valid(linked_powerup): return true
+	if dont_count_inactive and not linked_powerup.active: return true
+	return false
 
 func can_have_powerup() -> bool:
 	if field.is_left_field() and field.gates.get_gate(0) == self: return false

@@ -46,4 +46,16 @@ func grab(powerup, grabber):
 		field.balls.change_type_to('small')
 	
 	elif type == 'shrink_all':
-		field.players.call_deferred('shrink_all', 0.5)
+		field.players.call_deferred('change_size_all', 0.5)
+	
+	elif type == 'grow_all':
+		field.players.call_deferred('change_size_all', 1.5)
+	
+	elif type == "ball_not_bouncy":
+		field.balls.change_type_to('not_bouncy')
+	
+	elif type == 'add_obstacles':
+		field.obstacles.add_from_powerup()
+	
+	elif type == 'remove_obstacles':
+		field.obstacles.remove_all()

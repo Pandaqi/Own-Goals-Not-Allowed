@@ -22,6 +22,7 @@ const FIELD_BOUNDS : Dictionary = { 'min': 220.0, 'max': 350.0 }
 @onready var goaleffects = $GoalEffects
 @onready var gates = $Gates
 @onready var powerups = $Powerups
+@onready var obstacles = $Obstacles
 
 func activate():
 	if randf() <= 0.5:
@@ -39,6 +40,7 @@ func post_tween_activate():
 	balls.activate()
 	players.activate()
 	gates.activate()
+	obstacles.activate()
 	
 	busy_initializing = false
 

@@ -27,6 +27,12 @@ func set_type(tp : String):
 		physics_material_override = physics_material_override.duplicate(true)
 		physics_material_override.bounce = 2.5
 	
+	elif type == 'not_bouncy':
+		physics_material_override = physics_material_override.duplicate(true)
+		physics_material_override.bounce = 0.0
+		
+		linear_damp = LINEAR_DAMPING * 5.0
+	
 	elif type == 'small':
 		$CollisionShape2D.shape = $CollisionShape2D.shape.duplicate(true)
 		$CollisionShape2D.shape.radius *= 0.5
@@ -57,6 +63,7 @@ func _integrate_forces(state):
 func cap_velocity(state):
 	var factor = field.powerups.get_slowdown_factor()
 	if type == 'extra_bouncy': factor *= 2.0
+	elif type == 'not_bouncy': factor *= 0.5
 	
 	var speed = state.linear_velocity.length()
 	var dir = state.linear_velocity.normalized()

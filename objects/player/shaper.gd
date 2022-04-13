@@ -37,11 +37,14 @@ func calculate_centroid(shp):
 
 func change_size(val : float):
 	size *= val
+	face_sprite.set_scale(size * BASE_FACE_SCALE * Vector2.ONE)
 	
+	# NOTE: done this way to make physics engine happy
+	call_deferred("finalize_size_change", val)
+
+func finalize_size_change(val : float):
 	var cur_shape = Array(col_node.polygon) + []
 	var new_shape = GDict.scale_shape(cur_shape, val)
 	new_shape = reposition_around_centroid(new_shape)
 	col_node.polygon = new_shape
 	body.drawer.update_shape()
-	
-	face_sprite.set_scale(size * BASE_FACE_SCALE)

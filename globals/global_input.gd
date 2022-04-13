@@ -309,7 +309,7 @@ func check_remove_controller(ev):
 	
 	if not device_already_registered(ev.device): return ERR_NOTHING_TO_REMOVE
 	
-	var p_num = -1 # TO DO: find player num from device id?
+	var p_num = get_player_num_from_device(ev.device)
 	return remove_player(p_num)
 
 func check_remove_keyboard(ev):
@@ -562,3 +562,8 @@ func get_num_keyboard_players():
 
 func get_split_status_for(player_num : int) -> int:
 	return device_order[player_num].splits[0]
+
+func get_player_num_from_device(device_num : int) -> int:
+	for i in range(device_order.size()):
+		if device_order[i].device == device_num: return i
+	return -1

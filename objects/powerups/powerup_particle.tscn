@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://2qcrg8np53c5"]
+
+[ext_resource type="Script" path="res://objects/field/goaleffects/confetti_particles.gd" id="1_6o0c4"]
+[ext_resource type="Texture2D" uid="uid://ku6pqf5b6vdx" path="res://objects/powerups/powerup_particle.png" id="2_kynvw"]
+
+[sub_resource type="Gradient" id="Gradient_srd16"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xmve4"]
+gradient = SubResource( "Gradient_srd16" )
+
+[sub_resource type="Curve" id="Curve_o6xc0"]
+_data = [Vector2(0.0119048, 0), 0.0, 3.05455, 0, 0, Vector2(0.14881, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.67273, 0.0, 0, 0]
+
+[sub_resource type="CurveTexture" id="CurveTexture_whndn"]
+curve = SubResource( "Curve_o6xc0" )
+
+[sub_resource type="ParticlesMaterial" id="ParticlesMaterial_7f40m"]
+emission_shape = 3
+emission_box_extents = Vector3(75, 5, 1)
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 60.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.1
+scale_max = 0.2
+scale_curve = SubResource( "CurveTexture_whndn" )
+color_ramp = SubResource( "GradientTexture1D_xmve4" )
+
+[node name="PowerupParticle" type="Node2D"]
+position = Vector2(192, 147)
+scale = Vector2(1.5, 1.5)
+script = ExtResource( "1_6o0c4" )
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 24
+explosiveness = 1.0
+process_material = SubResource( "ParticlesMaterial_7f40m" )
+texture = ExtResource( "2_kynvw" )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

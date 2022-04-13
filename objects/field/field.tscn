@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d4la8xs0ylxci"]
+[gd_scene load_steps=17 format=3 uid="uid://d4la8xs0ylxci"]
 
 [ext_resource type="Script" path="res://objects/field/field.gd" id="1_ssool"]
 [ext_resource type="Shader" path="res://objects/field/bg/field.gdshader" id="2_7vcgt"]
@@ -14,6 +14,7 @@
 [ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="11_c461m"]
 [ext_resource type="Script" path="res://objects/field/gates/gates.gd" id="13_db8g1"]
 [ext_resource type="Script" path="res://objects/field/powerups.gd" id="14_fw1qc"]
+[ext_resource type="Script" path="res://objects/field/obstacles.gd" id="15_mmykx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a6lye"]
 shader = ExtResource( "2_7vcgt" )
@@ -90,3 +91,11 @@ script = ExtResource( "13_db8g1" )
 
 [node name="Powerups" type="Node2D" parent="."]
 script = ExtResource( "14_fw1qc" )
+
+[node name="Obstacles" type="Node2D" parent="."]
+script = ExtResource( "15_mmykx" )
+
+[node name="Timer" type="Timer" parent="Obstacles"]
+one_shot = true
+
+[connection signal="timeout" from="Obstacles/Timer" to="Obstacles" method="_on_timer_timeout"]
