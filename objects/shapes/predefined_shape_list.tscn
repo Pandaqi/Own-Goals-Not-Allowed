@@ -14,20 +14,8 @@ polygon = PackedVector2Array(20, 0, 18, 8, 14, 14, 8, 18, 0, 20, -8, 18, -14, 14
 position = Vector2(0, -126.076)
 polygon = PackedVector2Array(20, 0, 6, 19, -16, 12, -16, -12, 6, -19)
 
-[node name="Hexagon" type="CollisionPolygon2D" parent="."]
-position = Vector2(65.6867, -128.725)
-polygon = PackedVector2Array(20, 0, 10, 17, -10, 17, -20, 0, -10, -17, 10, -17)
-
-[node name="Parallellogram" type="CollisionPolygon2D" parent="."]
-position = Vector2(66.2165, -65.157)
-polygon = PackedVector2Array(-22.9927, 14.062, -12.8791, -13.2821, 21.9565, -12.9075, 9.97004, 13.6875)
-
 [node name="StarPenta" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-0.0625458, -21.8882, 6.11099, -8.13805, 21.2642, -6.45436, 10.3202, 4.20902, 12.8458, 18.801, -0.34317, 12.3469, -13.5321, 19.6429, -10.7259, 4.48964, -21.9506, -6.17375, -7.07794, -8.13805)
-
-[node name="StarHexa" type="CollisionPolygon2D" parent="."]
-position = Vector2(-65.1028, 0)
-polygon = PackedVector2Array(-0.328659, -22.92, 5.6241, -11.8082, 17.9265, -12.0066, 12.3706, -1.49011, 18.1249, 9.22485, 5.82253, 9.22485, -0.130234, 19.7414, -6.67826, 9.42327, -18.9806, 9.42327, -13.2263, -0.894836, -18.9806, -12.4035, -6.67826, -12.4035)
 
 [node name="Trapezium" type="CollisionPolygon2D" parent="."]
 position = Vector2(0.561234, -61.1742)

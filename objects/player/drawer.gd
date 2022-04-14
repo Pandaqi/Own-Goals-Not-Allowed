@@ -5,7 +5,12 @@ var color : Color = Color(1.0, 0.0, 0.0)
 
 var points : Array
 var outline : Array
-var outline_thickness = 2
+var outline_thickness = 4
+
+var emit_outline : bool = false
+var emit_radius : float = outline_thickness
+const EMIT_MOVE_SPEED : float = 40.0
+const MAX_EMIT_RADIUS : float = 30.0
 
 func calculate_shape_list():
 	var shape_list = []
@@ -16,6 +21,16 @@ func calculate_shape_list():
 		shape_list.append(shape.points)
 	
 	return shape_list
+
+func _physics_process(dt):
+	if emit_outline:
+		emit_radius += EMIT_MOVE_SPEED * dt
+		
+		# resets to outline thickness, otherwise this STARTS inside the shape/outline, which looks ugly
+		if emit_radius > MAX_EMIT_RADIUS:
+			emit_radius = outline_thickness
+		
+		update()
 
 func update_shape():
 	var shape_list = calculate_shape_list()
@@ -42,9 +57,9 @@ func update_shape():
 	
 	points = full_polygon
 	
-	var outline_margin = 0
-	var outline_polygon = Geometry2D.offset_polygon(full_polygon, outline_margin)[0]
-	outline_polygon.append(outline_polygon[0]) # add starting point at the end as well, to close the polygon
+	var outline_margin = 0.5*outline_thickness
+	var outline_polygon = Geometry2D.offset_polyline(points, outline_margin, Geometry2D.JOIN_ROUND, Geometry2D.END_JOINED)[0]
+	#outline_polygon.append(outline_polygon[0]) # add starting point at the end as well, to close the polygon
 
 	outline = outline_polygon
 	
@@ -59,3 +74,9 @@ func _draw():
 	if outline_thickness > 0:
 		var outline_color = color.darkened(0.6)
 		draw_polyline(outline, outline_color, outline_thickness, true)
+	
+	if emit_outline:
+		var scaled_outline = Geometry2D.offset_polyline(points, emit_radius, Geometry2D.JOIN_ROUND, Geometry2D.END_JOINED)[0]
+		var emit_color = color.lightened(0.3)
+		emit_color.a = 1.0 - emit_radius / MAX_EMIT_RADIUS
+		draw_polyline(scaled_outline, emit_color, 1, 3)

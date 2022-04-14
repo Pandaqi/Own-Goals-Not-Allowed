@@ -6,7 +6,11 @@ var nodes = []
 
 const OBSTACLES_FROM_POWERUP : Dictionary = { 'min': 3, 'max': 5 }
 const TIMER_BOUNDS : Dictionary = { 'min': 3.0, 'max': 7.0 }
+
+const MAX_AREA : float = 250.0
+
 const OBSTACLE_BOUNDS : Dictionary = { 'min': 0, 'max': 5 }
+var obstacle_bounds : Dictionary = {}
 
 const STARTING_OBSTACLE_PROB : float = 0.25
 
@@ -15,10 +19,18 @@ var obstacle_scene : PackedScene = preload("res://objects/field/obstacles/obstac
 @onready var timer : Timer = $Timer
 
 func activate():
+	restart_timer()
+	
+	var field_width = 0.8 * field.get_size().x
+	obstacle_bounds = {
+		'min': 0,
+		'max': floor( clamp( field_width / MAX_AREA, 0, 1) * OBSTACLE_BOUNDS.max)
+	}
+	
 	if randf() <= STARTING_OBSTACLE_PROB:
 		add_one()
 	
-	restart_timer()
+	
 
 #
 # Removing
@@ -42,7 +54,7 @@ func add_from_powerup():
 		add_one()
 
 func add_one():
-	if nodes.size() >= OBSTACLE_BOUNDS.max: return
+	if nodes.size() >= obstacle_bounds.max: return
 	
 	var new_pos = get_random_valid_pos()
 	if new_pos == null: return
@@ -64,9 +76,9 @@ func get_random_valid_pos():
 	var num_tries : int = 0
 	
 	var spawn_props = { 
-		'min_dist_to_player': 50,
-		'min_dist_to_ball': 50,
-		'min_dist_to_obstacle': 30
+		'min_dist_to_player': 45,
+		'min_dist_to_ball': 60,
+		'min_dist_to_obstacle': 70
 	}
 	
 	while bad_pos:
@@ -109,7 +121,7 @@ func restart_timer():
 func _on_timer_timeout():
 	restart_timer()
 	
-	var remove_prob = nodes.size() / OBSTACLE_BOUNDS.max
+	var remove_prob = nodes.size() / obstacle_bounds.max
 	
 	if randf() <= remove_prob:
 		remove_one()

@@ -5,7 +5,7 @@ extends StaticBody2D
 var team
 @onready var drawer = $Drawer
 
-const TIMER_BOUNDS : Dictionary = { 'min': 0.8, 'max': 2.2 }
+const TIMER_BOUNDS : Dictionary = { 'min': 1.4, 'max': 3.0 }
 const BLOW_AWAY_FORCE : float = 3000.0
 const BALL_BLOW_AWAY_FORCE : float = 400.0
 @onready var timer : Timer = $BlowAwayForce/Timer

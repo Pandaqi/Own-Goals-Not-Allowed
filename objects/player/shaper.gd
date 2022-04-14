@@ -4,7 +4,7 @@ extends Node2D
 var col_node
 
 @onready var face_sprite = $FaceSprite
-const BASE_FACE_SCALE : float = 0.2
+const BASE_FACE_SCALE : float = 0.1
 var size : float = 1.0
 
 func activate():
