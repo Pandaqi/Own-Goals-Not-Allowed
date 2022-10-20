@@ -54,6 +54,10 @@ func is_own_goal(team_num, ball) -> bool:
 
 # TO DO: make this a signal instead that is connected with all those other parts?
 func scored_in_goal(team_num : int, ball, top_goal : bool):
+	print("SCORED")
+	print(team_num)
+	print(ball)
+	
 	var own_goal = is_own_goal(team_num, ball)
 	
 	field.goaleffects.execute(ball, own_goal)

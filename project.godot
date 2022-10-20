@@ -12,10 +12,10 @@ config_version=5
 
 config/name="Own Goals Not Allowed"
 run/main_scene="res://pandaqi_boot/pandaqi_boot_scene.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://metadata/favicon.png"
 config/macos_native_icon="res://metadata/favicon.icns"
 config/windows_native_icon="res://metadata/favicon.ico"
-config/features=PackedStringArray("4.0", "Vulkan Clustered")
 
 [autoload]
 
@@ -28,8 +28,8 @@ GAudio="*res://globals/global_audio.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/fullscreen=true
 window/stretch/mode="canvas_items"
+window/size/fullscreen=true
 
 [importer_defaults]
 

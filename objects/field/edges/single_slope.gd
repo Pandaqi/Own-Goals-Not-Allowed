@@ -17,10 +17,10 @@ func _ready():
 
 func set_team(t_num):
 	team = t_num
-	drawer.update()
+	drawer.queue_redraw()
 
 func set_size(size : Vector2):
-	drawer.update()
+	drawer.queue_redraw()
 
 func restart_timer():
 	timer.wait_time = randf_range(TIMER_BOUNDS.min, TIMER_BOUNDS.max)

@@ -10,11 +10,11 @@ bounce = 1.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wso35"]
 
 [node name="Edge" type="StaticBody2D"]
-physics_material_override = SubResource( "PhysicsMaterial_k8mo2" )
-script = ExtResource( "1_fyfl3" )
+physics_material_override = SubResource("PhysicsMaterial_k8mo2")
+script = ExtResource("1_fyfl3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( "RectangleShape2D_wso35" )
+shape = SubResource("RectangleShape2D_wso35")
 
 [node name="Drawer" type="Node2D" parent="."]
-script = ExtResource( "2_reu2u" )
+script = ExtResource("2_reu2u")

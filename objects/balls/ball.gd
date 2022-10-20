@@ -1,4 +1,4 @@
-extends RigidDynamicBody2D
+extends RigidBody2D
 
 const VEL_BOUNDS : Dictionary = { 'min': 50.0, 'max': 700.0 }
 var last_touch = null
@@ -39,7 +39,7 @@ func set_type(tp : String):
 		sprite.scale *= 0.5
 		drawer.outline_thickness *= 0.5
 	
-	drawer.update()
+	drawer.queue_redraw()
 
 func plan_teleport(pos : Vector2):
 	teleport_pos = pos

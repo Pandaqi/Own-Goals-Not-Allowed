@@ -11,26 +11,26 @@ bounce = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_fijp1"]
 radius = 14.0
 
-[node name="Ball" type="RigidDynamicBody2D" groups=["Balls"]]
-physics_material_override = SubResource( "PhysicsMaterial_2xb6w" )
+[node name="Ball" type="RigidBody2D" groups=["Balls"]]
+physics_material_override = SubResource("PhysicsMaterial_2xb6w")
 continuous_cd = 2
-contacts_reported = 5
+max_contacts_reported = 5
 contact_monitor = true
 can_sleep = false
 linear_damp = 0.5
-script = ExtResource( "1_a8hnv" )
+script = ExtResource("1_a8hnv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( "CircleShape2D_fijp1" )
+shape = SubResource("CircleShape2D_fijp1")
 
 [node name="Drawer" type="Node2D" parent="."]
-script = ExtResource( "3_u2sxe" )
+script = ExtResource("3_u2sxe")
 
-[node name="GPUParticles2D" parent="Drawer" instance=ExtResource( "3_5phx3" )]
+[node name="GPUParticles2D" parent="Drawer" instance=ExtResource("3_5phx3")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Drawer"]
 scale = Vector2(0.125, 0.125)
-texture = ExtResource( "4_rt2cs" )
+texture = ExtResource("4_rt2cs")
 hframes = 8
 
 [node name="NoGoalTimer" type="Timer" parent="."]

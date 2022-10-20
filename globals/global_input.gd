@@ -238,7 +238,7 @@ func printout_inputmap():
 	for action in ac:
 		print("== ACTION == ")
 		print(action)
-		var input_list = InputMap.get_action_list(action)
+		var input_list = InputMap.action_get_events(action)
 		
 		for inp in input_list:
 			if not (inp is InputEventJoypadMotion): continue

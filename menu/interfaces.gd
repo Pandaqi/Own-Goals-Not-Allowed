@@ -31,7 +31,7 @@ func on_player_ready():
 	var total_num = GInput.get_player_count()
 	if num < total_num: return
 	
-	get_tree().change_scene("res://gameloop/main.tscn")
+	get_tree().change_scene_to_file("res://gameloop/main.tscn")
 
 func count_players_ready() -> int:
 	var sum : int = 0

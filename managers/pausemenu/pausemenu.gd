@@ -46,7 +46,7 @@ func _input(ev):
 	if ev.is_action_released("pause_menu_exit"):
 		GAudio.play_static_sound("ui_button")
 		get_tree().paused = false
-		get_tree().change_scene("res://gameloop/input_select.tscn")
+		get_tree().change_scene_to_file("res://gameloop/input_select.tscn")
 	
 	elif ev.is_action_released("pause_menu_restart"):
 		GAudio.play_static_sound("ui_button")

@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqvm82vydy50t"]
 
 [ext_resource type="Script" path="res://objects/field/score/score_label.gd" id="1_ohnoc"]
-[ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="2_tl4vu"]
+[ext_resource type="FontFile" uid="uid://dhkxu4xl83jk2" path="res://globals/fonts/rubik_mono_one.ttf" id="2_6l40j"]
 
 [node name="ScoreLabel" type="Node2D"]
-script = ExtResource( "1_ohnoc" )
+script = ExtResource("1_ohnoc")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -146.0
@@ -13,7 +13,7 @@ offset_right = 143.0
 offset_bottom = 47.0
 theme_override_colors/font_outline_color = Color(0.278431, 0.278431, 0.278431, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource( "2_tl4vu" )
+theme_override_fonts/font = ExtResource("2_6l40j")
 theme_override_font_sizes/font_size = 72
 text = "0"
 horizontal_alignment = 1

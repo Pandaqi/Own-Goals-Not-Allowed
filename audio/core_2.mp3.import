@@ -14,3 +14,6 @@ dest_files=["res://.godot/imported/core_2.mp3-d4c16864ce841813afdafe94b9d69788.m
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

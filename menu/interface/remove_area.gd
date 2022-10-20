@@ -11,7 +11,7 @@ signal completed()
 
 func _ready():
 	sprite.material = sprite.material.duplicate(true)
-	sprite.material.set_shader_param("reverse", reverse)
+	sprite.material.set_shader_parameter("reverse", reverse)
 
 func reset():
 	is_done = false
@@ -40,4 +40,4 @@ func _physics_process(dt):
 		emit_signal("completed")
 
 func update_visuals():
-	sprite.material.set_shader_param("num", num)
+	sprite.material.set_shader_parameter("num", num)

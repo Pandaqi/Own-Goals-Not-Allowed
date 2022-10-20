@@ -11,4 +11,4 @@ func _ready():
 	container.set_position(0.5*get_viewport().size)
 
 func on_anim_done():
-	get_tree().change_scene_to(scene_to_load)
+	get_tree().change_scene_to_packed(scene_to_load)

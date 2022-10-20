@@ -63,4 +63,4 @@ func _input(ev):
 	
 	elif ev.is_action_released("game_over_back"):
 		GAudio.play_static_sound("ui_button")
-		get_tree().change_scene("res://gameloop/input_select.tscn")
+		get_tree().change_scene_to_file("res://gameloop/input_select.tscn")

@@ -92,6 +92,6 @@ func reverse_goal_dir():
 	update_all_visuals()
 
 func update_all_visuals():
-	drawer.update()
+	drawer.queue_redraw()
 	edges.update_from_field()
 	score.update_from_field()

@@ -15,7 +15,7 @@ func reset_color():
 func change_color(col : Color):
 	color = col
 	particles.color = col.lightened(0.5)
-	update()
+	queue_redraw()
 
 func _draw():
 	var radius = body.get_node("CollisionShape2D").shape.radius

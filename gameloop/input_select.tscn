@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://menu/clickable_sprite.gd" id="7_la2fx"]
 [ext_resource type="Texture2D" uid="uid://jxbrgfg7t3q6" path="res://menu/bot_btn.png" id="9_0x66q"]
 [ext_resource type="Script" path="res://menu/bot_btn.gd" id="9_flvv1"]
-[ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="11_4xvet"]
+[ext_resource type="FontFile" uid="uid://dhkxu4xl83jk2" path="res://globals/fonts/rubik_mono_one.ttf" id="11_u2sbj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_afbus"]
 size = Vector2(57, 63)
@@ -19,75 +19,75 @@ size = Vector2(57, 63)
 size = Vector2(121, 63)
 
 [node name="Main" type="Node2D"]
-script = ExtResource( "1_ivkme" )
+script = ExtResource("1_ivkme")
 
-[node name="BG" parent="." instance=ExtResource( "1_u1y8k" )]
+[node name="BG" parent="." instance=ExtResource("1_u1y8k")]
 
 [node name="Sidebar" type="Node2D" parent="."]
 
 [node name="Explanation" type="Sprite2D" parent="Sidebar"]
 position = Vector2(163, 466)
 scale = Vector2(0.35, 0.35)
-texture = ExtResource( "3_pe2sd" )
+texture = ExtResource("3_pe2sd")
 
 [node name="Logo" type="Sprite2D" parent="Sidebar"]
 position = Vector2(164, 125)
 scale = Vector2(0.4, 0.4)
-texture = ExtResource( "4_wdd04" )
+texture = ExtResource("4_wdd04")
 
 [node name="Interfaces" type="Node2D" parent="."]
-script = ExtResource( "5_h4jq3" )
+script = ExtResource("5_h4jq3")
 
-[node name="Interface1" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+[node name="Interface1" parent="Interfaces" instance=ExtResource("5_auwjo")]
 position = Vector2(471, 214)
 
-[node name="Interface2" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+[node name="Interface2" parent="Interfaces" instance=ExtResource("5_auwjo")]
 position = Vector2(786, 214)
 
-[node name="Interface3" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+[node name="Interface3" parent="Interfaces" instance=ExtResource("5_auwjo")]
 position = Vector2(1099, 214)
 
-[node name="Interface4" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+[node name="Interface4" parent="Interfaces" instance=ExtResource("5_auwjo")]
 position = Vector2(471, 488)
 
-[node name="Interface5" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+[node name="Interface5" parent="Interfaces" instance=ExtResource("5_auwjo")]
 position = Vector2(786, 488)
 
-[node name="Interface6" parent="Interfaces" instance=ExtResource( "5_auwjo" )]
+[node name="Interface6" parent="Interfaces" instance=ExtResource("5_auwjo")]
 position = Vector2(1099, 488)
 
 [node name="CornerButtons" type="Node2D" parent="."]
 
 [node name="QuitBtn" type="Area2D" parent="CornerButtons"]
 position = Vector2(1236, 51)
-script = ExtResource( "7_la2fx" )
+script = ExtResource("7_la2fx")
 
 [node name="Sprite2D" type="Sprite2D" parent="CornerButtons/QuitBtn"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource( "7_dj4ft" )
+texture = ExtResource("7_dj4ft")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CornerButtons/QuitBtn"]
 position = Vector2(0.5, -24.5)
-shape = SubResource( "RectangleShape2D_afbus" )
+shape = SubResource("RectangleShape2D_afbus")
 
 [node name="BotBtn" type="Area2D" parent="CornerButtons"]
 position = Vector2(1140, 51)
-script = ExtResource( "9_flvv1" )
+script = ExtResource("9_flvv1")
 
 [node name="Sprite2D" type="Sprite2D" parent="CornerButtons/BotBtn"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource( "9_0x66q" )
+texture = ExtResource("9_0x66q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CornerButtons/BotBtn"]
 position = Vector2(-0.5, -24.5)
-shape = SubResource( "RectangleShape2D_oxxq0" )
+shape = SubResource("RectangleShape2D_oxxq0")
 
 [node name="Label" type="Label" parent="CornerButtons/BotBtn"]
 offset_left = -61.0
 offset_top = -46.0
 offset_right = 59.0
 theme_override_colors/font_color = Color(0.00392157, 0.262745, 0, 1)
-theme_override_fonts/font = ExtResource( "11_4xvet" )
+theme_override_fonts/font = ExtResource("11_u2sbj")
 theme_override_font_sizes/font_size = 14
 text = "Add bots?
 Off"

@@ -30,7 +30,7 @@ func _physics_process(dt):
 		if emit_radius > MAX_EMIT_RADIUS:
 			emit_radius = outline_thickness
 		
-		update()
+		queue_redraw()
 
 func update_shape():
 	var shape_list = calculate_shape_list()
@@ -64,7 +64,7 @@ func update_shape():
 	outline = outline_polygon
 	
 	# finally, actually re-do the _draw() call
-	update()
+	queue_redraw()
 
 func _draw():
 	color = GDict.cfg.colors.teams[body.team_num].lightened(0.3)

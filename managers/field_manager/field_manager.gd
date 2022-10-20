@@ -180,12 +180,18 @@ func show_all_fields():
 	var tw = get_tree().create_tween()
 	for f in fields:
 		tw.tween_property(f, "modulate", Color(1,1,1,1), 0.16)
+	var powerups = main_node.powerups.get_all()
+	for p in powerups:
+		tw.tween_property(p, "modulate", Color(1,1,1,1), 0.16)
 	return tw
 
 func hide_all_fields():
 	var tw = get_tree().create_tween()
 	for f in fields:
 		tw.tween_property(f, "modulate", Color(1,1,1,0), 0.16)
+	var powerups = main_node.powerups.get_all()
+	for p in powerups:
+		tw.tween_property(p, "modulate", Color(1,1,1,0), 0.16)
 	return tw
 
 func play_bouncy_tween(node, is_reveal : bool = true):

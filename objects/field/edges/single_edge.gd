@@ -13,11 +13,11 @@ func _ready():
 
 func set_team(t_num):
 	team = t_num
-	drawer.update()
+	drawer.queue_redraw()
 
 func set_size(size : Vector2):
 	col_shape.size = size
-	drawer.update()
+	drawer.queue_redraw()
 
 func make_player_blocking():
 	player_blocking = true

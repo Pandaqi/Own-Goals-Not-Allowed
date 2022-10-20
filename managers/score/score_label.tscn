@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://irjchanwcytr"]
 
-[ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="1_i71ob"]
+[ext_resource type="FontFile" uid="uid://dhkxu4xl83jk2" path="res://globals/fonts/rubik_mono_one.ttf" id="1_3y7b5"]
 
 [node name="ScoreLabel" type="Node2D"]
 
@@ -11,7 +11,7 @@ offset_right = 196.0
 offset_bottom = 84.0
 theme_override_colors/font_outline_color = Color(0.396078, 0.396078, 0.396078, 1)
 theme_override_constants/outline_size = 50
-theme_override_fonts/font = ExtResource( "1_i71ob" )
+theme_override_fonts/font = ExtResource("1_3y7b5")
 theme_override_font_sizes/font_size = 96
 text = "0"
 horizontal_alignment = 1

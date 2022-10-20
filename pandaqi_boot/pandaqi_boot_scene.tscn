@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bk4ft5ijk087k"]
+[gd_scene load_steps=15 format=3 uid="uid://bk4ft5ijk087k"]
 
 [ext_resource type="Texture2D" uid="uid://ddvjriucxl4x7" path="res://pandaqi_boot/head.png" id="1"]
 [ext_resource type="PackedScene" uid="uid://bx713grcpa20d" path="res://gameloop/input_select.tscn" id="2_0bvpy"]
-[ext_resource type="Font" uid="uid://cnaqsqfkdp1pb" path="res://globals/fonts/thick_font_medium.tres" id="2_24fwj"]
 [ext_resource type="Texture2D" uid="uid://cq3tyfxencdld" path="res://pandaqi_boot/joystick.png" id="3"]
+[ext_resource type="FontFile" uid="uid://dhkxu4xl83jk2" path="res://globals/fonts/rubik_mono_one.ttf" id="3_t77hl"]
 [ext_resource type="Texture2D" uid="uid://dd88j0avrf7k3" path="res://pandaqi_boot/eye_pupil.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://el72a6vx4yju" path="res://pandaqi_boot/buttons.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://ckn47a4a4ep1u" path="res://pandaqi_boot/eye.png" id="6"]
@@ -561,9 +561,15 @@ tracks/21/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_abdm7"]
+_data = {
+"PandaqiBoot": SubResource("1"),
+"RESET": SubResource("2")
+}
+
 [node name="Main" type="Node2D"]
-script = ExtResource( "10" )
-scene_to_load = ExtResource( "2_0bvpy" )
+script = ExtResource("10")
+scene_to_load = ExtResource("2_0bvpy")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(960, 540)
@@ -577,7 +583,7 @@ offset_left = -191.0
 offset_top = 5.0
 offset_right = 175.0
 offset_bottom = 84.0
-theme_override_fonts/font = ExtResource( "2_24fwj" )
+theme_override_fonts/font = ExtResource("3_t77hl")
 text = "Pandaqi"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -587,44 +593,44 @@ vertical_alignment = 1
 [node name="Head" type="Sprite2D" parent="Node2D/Panda"]
 position = Vector2(-8, -85)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource( "1" )
+texture = ExtResource("1")
 
 [node name="Body" type="Sprite2D" parent="Node2D/Panda"]
 position = Vector2(-6, 65)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource( "7" )
+texture = ExtResource("7")
 
 [node name="Buttons" type="Sprite2D" parent="Node2D/Panda"]
 position = Vector2(63, 39)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource( "5" )
+texture = ExtResource("5")
 flip_h = true
 
 [node name="EyeL" type="Sprite2D" parent="Node2D/Panda"]
 position = Vector2(0, 625)
-texture = ExtResource( "6" )
+texture = ExtResource("6")
 
 [node name="EyePupilL" type="Sprite2D" parent="Node2D/Panda"]
 position = Vector2(-53, -82)
-texture = ExtResource( "4" )
+texture = ExtResource("4")
 
 [node name="EyeR" type="Sprite2D" parent="Node2D/Panda"]
 visible = false
 position = Vector2(6, -170)
 rotation = 180.0
-texture = ExtResource( "6" )
+texture = ExtResource("6")
 flip_h = true
 
 [node name="EyePupilR" type="Sprite2D" parent="Node2D/Panda"]
 visible = false
 position = Vector2(44, -85)
-texture = ExtResource( "4" )
+texture = ExtResource("4")
 flip_h = true
 
 [node name="Joystick" type="Sprite2D" parent="Node2D/Panda"]
 position = Vector2(-82, 31.5)
 scale = Vector2(1e-05, 1e-05)
-texture = ExtResource( "3" )
+texture = ExtResource("3")
 flip_h = true
 
 [node name="FullPandas" type="Node2D" parent="Node2D"]
@@ -632,13 +638,14 @@ visible = false
 
 [node name="PandaFullBrown" type="Sprite2D" parent="Node2D/FullPandas"]
 position = Vector2(-9, -3)
-texture = ExtResource( "9" )
+texture = ExtResource("9")
 
 [node name="PandaFullGreen" type="Sprite2D" parent="Node2D/FullPandas"]
 position = Vector2(-9, -3)
-texture = ExtResource( "8" )
+texture = ExtResource("8")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "PandaqiBoot"
-anims/PandaqiBoot = SubResource( "1" )
-anims/RESET = SubResource( "2" )
+libraries = {
+"": SubResource("AnimationLibrary_abdm7")
+}

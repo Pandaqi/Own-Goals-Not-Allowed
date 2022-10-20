@@ -85,3 +85,6 @@ func collect_gates_without_powerup() -> Array:
 			list.append(f.gates.get_gate(1))
 	
 	return list
+
+func get_all() -> Array:
+	return powerups

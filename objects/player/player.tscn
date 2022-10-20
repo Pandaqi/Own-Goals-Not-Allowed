@@ -13,40 +13,40 @@ bounce = 1.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5fcjo"]
 radius = 66.0303
 
-[node name="Player" type="RigidDynamicBody2D" groups=["Players"]]
+[node name="Player" type="RigidBody2D" groups=["Players"]]
 collision_layer = 3
 collision_mask = 3
 mass = 10.0
-physics_material_override = SubResource( "PhysicsMaterial_gmy82" )
-contacts_reported = 5
+physics_material_override = SubResource("PhysicsMaterial_gmy82")
+max_contacts_reported = 5
 contact_monitor = true
 can_sleep = false
-script = ExtResource( "1_sl0sd" )
+script = ExtResource("1_sl0sd")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
 [node name="Drawer" type="Node2D" parent="."]
-script = ExtResource( "3_3r6xp" )
+script = ExtResource("3_3r6xp")
 
-[node name="GPUParticles2D" parent="Drawer" instance=ExtResource( "4_mg7vg" )]
+[node name="GPUParticles2D" parent="Drawer" instance=ExtResource("4_mg7vg")]
 scale_amount_min = 0.3
 scale_amount_max = 0.4
 
 [node name="Shaper" type="Node2D" parent="."]
-script = ExtResource( "3_r27qp" )
+script = ExtResource("3_r27qp")
 
 [node name="FaceSprite" type="Sprite2D" parent="Shaper"]
 scale = Vector2(0.2, 0.2)
-texture = ExtResource( "6_pueqp" )
+texture = ExtResource("6_pueqp")
 hframes = 8
 
 [node name="Powerups" type="Node2D" parent="."]
-script = ExtResource( "5_lkxr3" )
+script = ExtResource("5_lkxr3")
 
 [node name="Area2D" type="Area2D" parent="Powerups"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Powerups/Area2D"]
-shape = SubResource( "CircleShape2D_5fcjo" )
+shape = SubResource("CircleShape2D_5fcjo")
 
 [node name="StartFreezeTimer" type="Timer" parent="."]
 wait_time = 0.65

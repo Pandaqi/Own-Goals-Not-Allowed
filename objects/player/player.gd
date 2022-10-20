@@ -1,4 +1,4 @@
-extends RigidDynamicBody2D
+extends RigidBody2D
 
 @onready var main_node = get_node("/root/Main")
 
@@ -110,3 +110,5 @@ func _on_player_body_entered(body):
 	if body.is_in_group("Balls") and body.type == 'not_bouncy': return
 	
 	body_hit = body.global_transform.origin
+	
+	print("BODY HITT")

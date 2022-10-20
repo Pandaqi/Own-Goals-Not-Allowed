@@ -1,6 +1,8 @@
 [gd_resource type="Font" load_steps=2 format=3 uid="uid://cnaqsqfkdp1pb"]
 
-[ext_resource type="FontData" uid="uid://dhkxu4xl83jk2" path="res://globals/fonts/rubik_mono_one.ttf" id="1_d6yyv"]
+[ext_resource type="FontFile" uid="uid://dhkxu4xl83jk2" path="res://globals/fonts/rubik_mono_one.ttf" id="1_d6yyv"]
 
 [resource]
-data/0 = ExtResource( "1_d6yyv" )
+resource_local_to_scene = false
+resource_name = ""
+data/0 = ExtResource("1_d6yyv")

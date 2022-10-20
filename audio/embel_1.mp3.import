@@ -14,3 +14,6 @@ dest_files=["res://.godot/imported/embel_1.mp3-f4c40007e6f6ccf1efa31f23b8f33188.
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
