@@ -42,6 +42,8 @@ func game_over(winning_team : int):
 
 	print("GAME OVER; team " + str(winning_team) + " won")
 
+# TO DO: This is a really stupid structure
+# on game_over() => it calls fields to remove all fields => only when all are gone and it can't rearrange 0 fields => it calls this function
 func _on_fields_no_fields_to_rearrange():
 	finalize_game_over()
 

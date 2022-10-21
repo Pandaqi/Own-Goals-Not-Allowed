@@ -215,4 +215,5 @@ position = Vector2(242, 195)
 scale = Vector2(0.5, 0.5)
 frame = 3
 
+[connection signal="no_fields_to_rearrange" from="Fields" to="GameOver" method="_on_fields_no_fields_to_rearrange"]
 [connection signal="timeout" from="Powerups/Timer" to="Powerups" method="_on_timer_timeout"]
