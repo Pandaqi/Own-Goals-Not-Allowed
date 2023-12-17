@@ -1,12 +1,144 @@
+# Splitball
+
+## Alt Names
+
+-   Cutie Footie
+
+-   Multidimensional Soccer
+
+-   No Own Goals Allowed \<= I like this one as well, or a variation on it
+
+    -   Own Goals Not Allowed is better, because "no own" is clunky with two o-s after each other.
+
+## Idea
+
+You're playing a *very simple* pong/soccer game. You're just a dot, the ball is just a dot, goals on two sides, small field. 2D, top-down view, simplified graphics.
+
+**However, multiple of these games are happening at the same time.**
+
+So you're not just moving in one game, you're simultaneously moving in *all of them*. Which means you might accidentally block your teammate's shot somewhere else. Or own goal.
+
+"No Own Goals Allowed": if you score an *own goal*, you immediately lose. (Or it's just a *huge* penalty, like 10 goals to the opponent.)
+
+The general feel of the game? One where you must always multitask and jump between fields/playstyle, and each field is always unfair (with one side at a disadvantage) by design.
+
+## Objective
+
+Score X goals *across all fields*.
+
+## Input
+
+Each player can *move* their character. That's all.
+
+## Potential Pitfalls
+
+**How to prevent players from just playing on *one field* (ignoring all others)?**
+
+The rule "own goal is really bad" and the fact that you can always focus on other/easier fields are *subtle* pushes.
+
+Here's a more certain method:
+
+-   When you score, your character is *removed* from that field. (If this was your last character, it's simply transferred to another field.)
+
+-   When someone scores against a team, one of the players in that team gets an *extra character*. (If you're already present in all fields, nothing happens.)
+
+Scoring an *own goal* means these cancel each other out: you are removed from that field, then added back.
+
+**How to prevent extremely easy scoring (because one team just isn't present on a field)?**
+
+The method above kinda solves this. (If you concede a goal, you get an extra character on that field.)
+
+To aid players:
+
+-   Provide ways to purposely walk to a different field. (Like powerups or gates you can enter.)
+
+    -   Gates at the sides of the field, that literally connect with the field they go to (or point at it) are probably clearest.
+
+    -   Don't allow entering a field where you already are? Or is that actually also fun?
+
+-   Provide ways to *defend* a field at which you're not present. (Through powerups, actions you apply to *other* fields.)
+
+## Powerups
+
+### Field-Focused
+
+-   Remove everyone
+
+-   Remove everyone from the opposing team
+
+-   Add a ball
+
+-   Make the ball worth 5 points
+
+-   Make the ball worth twice as many points
+
+-   Slow down the whole field
+
+-   Shrink / Grow the goals
+
+-   Reverse goal dir (which team at top, which at bottom)
+
+-   Make ball small
+
+-   Make ball extra bouncy
+
+-   Shrink all players on field
+
+-   Grow all players on field
+
+-   Make ball not bouncy
+
+-   Add (many) obstacles at once
+
+-   Remove all obstacles
+
+### Player-Focused
+
+-   Move faster
+
+-   Move slower
+
+-   Reverse Controls
+
+-   Shrink
+
+-   Grow
+
+-   Magnet (attracts ball, which can lead to more own goals, or be used in attacking)
+
+Something more to change the physics? (Players get a tiny attracting/repelling force?)
+
+(Only shrink or grow *your* goal with that powerup?)
+
+A "max bodies on field" (or "min bodies on field") powerup/property?
+
+# To Do
+
+**Test =>** create screenshots/GIFs/trailer => publish and market a bit
+
+### Optional To Do
+
+**FIELDS:**
+
+-   *Inside* shadow for the field walls. (Also rounded corners?)
+
+-   The goal *placement* (on back edge) can also be randomized.
+
+-   Grow goal if players close, shrink if nobody close.
+
+    -   Or just grow/shrink goals after each goal
+
+    -   Or check which team has *more* players here (on a fixed timer)
+
 # Devlog
 
-Welcome to this *really short* devlog for my game "Own Goals Not Allowed".
-
-(Previously called **Splitball** in my notes. Then it was called "No Own Goals Allowed", but the combination of *No Own* is just hard to read and pronounce.)
+Welcome to this *really short* devlog for my game "No Own Goals Allowed".
 
 It's my first "weekend project". Previously, I basically worked on my main project(s) all days of the week, but it was just burning me out. So from now on, I'm trying to switch it up during the weekends.
 
 For that, I needed (game) ideas that were short and simple enough that I can make them in 2-3 days. And they'd actually be finished and fully playable.
+
+Here's the first one: **No Own Goals Allowed.** (Previously called **Splitball** in my notes.)
 
 ## What's the idea?
 

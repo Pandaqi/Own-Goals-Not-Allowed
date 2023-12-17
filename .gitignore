@@ -1,2 +1,5 @@
+private/
+build/
+
 # Godot 4+ specific ignores
 .godot/
